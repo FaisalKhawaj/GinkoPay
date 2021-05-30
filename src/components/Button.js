@@ -1,15 +1,27 @@
-import React from 'react';
-import { View, Text,StyleSheet,Dimensions, TouchableOpacity } from 'react-native';
-const {width, height} = Dimensions.get("screen")
+import React,{useEffect, useState} from 'react';
+import { Text,StyleSheet,Dimensions, TouchableOpacity } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient'
 import { LinearGradientColorOne,transparent, LinearGradientColorTwo } from '../constants/colors';
+const window  = Dimensions.get("window");
+import {simpletext } from '../constants/fonts'
 const CustomButton = (props) => {
+  const [dimensions, setDimensions] = useState({ window  });
+  useEffect(() => {
+    const onChange = ({  window  }) => {
+      setDimensions({ window  });
+    };
+    Dimensions.addEventListener("change", onChange);
+    return () => {
+      Dimensions.removeEventListener("change", onChange);
+    };
+  });
+
    return (
     <LinearGradient 
       start={{x: 0, y: 0}} end={{x: 1, y: 0}}
       colors={[LinearGradientColorOne,LinearGradientColorTwo]} 
-      style={styles.container}>
-      <TouchableOpacity style={styles.container} onPress={() => props.onPress()}>
+      style={{...styles.container, width:dimensions.window.width-20}}>
+      <TouchableOpacity style={{...styles.container, width:dimensions.window.width-20}} onPress={() => props.onPress()}>
           <Text style={styles.text}>{props.text}</Text>
       </TouchableOpacity>
      </LinearGradient>
@@ -20,19 +32,18 @@ const CustomButton = (props) => {
  export default CustomButton;
  const styles = StyleSheet.create({
    container:{
-     width:width-20,
-     
      alignSelf:"center",
-     height:height/13,
+     height:60,
      justifyContent:"center",
      alignItems:"center",
      borderRadius:8,
      backgroundColor:transparent
    },
    text:{
-      fontSize:16,
+      fontSize:18,
       fontWeight:"bold",
-      color:"rgba(0,0,0,.8)"
+      fontFamily:simpletext,
+      color:"rgba(0,0,0,.7)"
    }
  })
  

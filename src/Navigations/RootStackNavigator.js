@@ -8,7 +8,12 @@ import CreateAccountIntro from '../screens/createaccountintro'
 import Login from '../screens/login'
 import CreataAccount from '../screens/createaccount'
 import UploadImage from '../screens/uploadpicture'
+import UploadedImage from '../screens/uploaddedpicture'
 import KycNeed from '../screens/kycneed'
+
+// DashBoard
+import DashBoardScreen from '../screens/dashboard'
+
 const RootStack = createStackNavigator();
 enableScreens()
 const RootStackScreen = ({navigation}) => {
@@ -36,21 +41,29 @@ const RootStackScreen = ({navigation}) => {
             name="CreateAccountIntro" 
             component={CreateAccountIntro} 
         />
-         <RootStack.Screen 
+        <RootStack.Screen 
             name="Login" 
             component={Login} 
         />
-         <RootStack.Screen 
+        <RootStack.Screen 
             name="CreataAccount" 
             component={CreataAccount} 
         />
-         <RootStack.Screen 
+        <RootStack.Screen 
             name="UploadImage" 
             component={UploadImage} 
         />
-         <RootStack.Screen 
+        <RootStack.Screen 
+            name="UploadedImage" 
+            component={UploadedImage} 
+        />
+        <RootStack.Screen 
             name="KycNeed" 
             component={KycNeed} 
+        />
+        <RootStack.Screen 
+            name="DashBoardScreen" 
+            component={DashBoardScreen} 
         />
     </RootStack.Navigator>
 )}

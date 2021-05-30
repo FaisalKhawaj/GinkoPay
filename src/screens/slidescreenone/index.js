@@ -1,21 +1,30 @@
 import React from 'react';
-import { View,  StatusBar, Image } from 'react-native';
+import { View,SafeAreaView, ScrollView,  StatusBar, Image } from 'react-native';
 import CustomText from '../../components/Text'
 import CustomButton from '../../components/Button'
 import ThreeDots from '../../components/ThreeDots'
-import styles from './styles'
+import styles,{width, height} from './styles'
+
  const SliderScreenOne = ({navigation}) => {
    StatusBar.setHidden(true)
    const gotonextScreen = () => {
      navigation.navigate("SliderScreenTwo")
    }
    return (
-     <View style={styles.container}>
-       <Image source={require("../../assets/slider1.png")} style={{width:200, height:200, resizeMode:"center"}} />
-       <CustomText text={"For the gamers and streamers"} />
-       <ThreeDots color={"one"} />
-       <CustomButton text={"Next"} onPress={gotonextScreen} />
-     </View>
+     <SafeAreaView style={styles.container}>
+        <ScrollView>
+            <View style={{...styles.container, paddingBottom:50}} >
+                <Image source={require("../../assets/slider1.png")} style={{width:width/1.3, height:width/1.3, resizeMode:"cover"}} />
+                <CustomText 
+                    text={"For the gamers and streamers"}
+                    locations={[0,.3,4,5,100]} colors={["#A9CDFF", "#72F6D1","#A0ED8D","#FED365","#FAA49E"]} 
+                    style={{fontSize:40,textAlign:"center"}} 
+                />
+                <ThreeDots color={"one"} />
+            <CustomButton text={"Next"} onPress={gotonextScreen} />
+          </View>
+        </ScrollView>
+     </SafeAreaView>
    );
  
  }; 

@@ -9,13 +9,15 @@ const MyComponent = ({label, value , setValue , error , setError }) => {
         <TextInput
             label={label}
             theme={{ 
-                colors:{ 
-                    primary: '#E5E5E5',                    
-                    placeholder :"#E5E5E5",
-                    text:"#E5E5E5",
-                    underlineColor:'transparent',
-                }}}
+              colors:{ 
+                  primary: '#E5E5E5',                    
+                  placeholder :"#E5E5E5",
+                  text:"#E5E5E5",
+                  underlineColor:'transparent',
+              }
+            }}
             mode="outlined"
+            placeholder="Choose Your Name"
             error={error.length === 0 ?false:true}
             value={value}
             style={{backgroundColor:BackgroundColor, fontWeight:"bold", color:"#E5E5E5", marginHorizontal:10, height:60, borderBottomColor:"green", borderRadius:10}}
@@ -29,5 +31,12 @@ const MyComponent = ({label, value , setValue , error , setError }) => {
 export default MyComponent;
 
 const styles = StyleSheet.create({
-
+// theme:{ 
+//   colors:{ 
+//       primary: '#E5E5E5',                    
+//       placeholder :"#E5E5E5",
+//       text:"#E5E5E5",
+//       underlineColor:'transparent',
+//   }
+// }
 })
