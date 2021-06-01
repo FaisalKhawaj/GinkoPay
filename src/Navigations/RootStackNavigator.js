@@ -13,6 +13,7 @@ import KycNeed from '../screens/kycneed'
 
 // DashBoard
 import DashBoardScreen from '../screens/dashboard'
+import CompaignMainPage from '../screens/Compaign';
 import Profile from '../screens/profile';
 
 const RootStack = createStackNavigator();
@@ -68,9 +69,16 @@ const RootStackScreen = ({ navigation }) => {
             />
 
             <RootStack.Screen
+                name="Compaign"
+                component={CompaignMainPage}
+            />
+
+            <RootStack.Screen
                 name="Profile"
                 component={Profile}
             />
+
+
         </RootStack.Navigator>
     )
 }
