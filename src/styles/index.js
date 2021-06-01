@@ -12,5 +12,13 @@ export const mystyles = StyleSheet.create(
         {
             marginLeft: 35
         },
+        simpleTextInput:
+        {
+            alignSelf: 'center', width: '90%',
+            padding: 15,
+            marginVertical: 10,
+            color: '#FFFF', borderColor: '#FAFAFA',
+            borderWidth: 0.2, borderRadius: 5,
+        }
     }
 )
