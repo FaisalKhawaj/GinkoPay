@@ -14,7 +14,7 @@ import KycNeed from '../screens/kycneed'
 // DashBoard
 import DashBoardScreen from '../screens/dashboard'
 import CompaignMainPage from '../screens/Compaign';
-import Profile from '../screens/profile';
+import Profile from '../screens/Profile';
 
 const RootStack = createStackNavigator();
 enableScreens()

@@ -8,6 +8,7 @@ import CryptoNews from '../../components/News';
 import CustomText from '../../components/Text';
 import DonateBtn from '../../components/DonateBtn';
 import Compaign from '../../components/compaign';
+import { mystyles } from '../../styles';
 
 
 const CompaignMainPage = ({ navigation }) => {
@@ -110,6 +111,7 @@ const CompaignMainPage = ({ navigation }) => {
         // setBtnSelect('TopRatedCompaign')
         setShowCompaign(!showCompaign)
     }
+
     const [showCompaign, setShowCompaign] = useState(false)
     const RecentCompaignShowHandler = () => {
         setShowCompaign(!showCompaign)
@@ -153,7 +155,7 @@ const CompaignMainPage = ({ navigation }) => {
                             setBtnSelect('TopRated')
                             setShowCompaign(false)
                         }}>
-                        <Text style={[styles.TopRatedRecentBtnText, {
+                        <Text style={[mystyles.TopRatedRecentBtnText, {
                             color: btnSelect === 'TopRated' ? '#FFFF' : '#888DAA'
                         }]}>Top Rated</Text>
                     </TouchableOpacity>
@@ -162,11 +164,11 @@ const CompaignMainPage = ({ navigation }) => {
                         setBtnSelect('Recent')
                         setShowCompaign(false)
                     }}
-                        style={[styles.RecentBtn, {
+                        style={[mystyles.RecentBtn, {
                             borderBottomWidth: btnSelect === 'Recent' ? 2 : 0,
                             borderBottomColor: btnSelect === 'Recent' ? '#FFFFFF' : '#17171A'
                         }]}>
-                        <Text style={[styles.TopRatedRecentBtnText, {
+                        <Text style={[mystyles.TopRatedRecentBtnText, {
                             color: btnSelect === 'Recent' ? '#FFFF' : '#888DAA'
                         }]}>Recent</Text>
                     </TouchableOpacity>
@@ -228,16 +230,16 @@ const styles = StyleSheet.create({
         width: 150,
         height: 170
     },
-    RecentBtn:
-    {
-        marginLeft: 35
-    },
-    TopRatedRecentBtnText:
-    {
-        color: '#FFFF',
-        fontSize: 16,
-        fontFamily: 'Poppins-Bold'
-    },
+    // RecentBtn:
+    // {
+    //     marginLeft: 35
+    // },
+    // TopRatedRecentBtnText:
+    // {
+    //     color: '#FFFF',
+    //     fontSize: 16,
+    //     fontFamily: 'Poppins-Bold'
+    // },
     compaignLargeImg:
     {
         marginVertical: 10,
