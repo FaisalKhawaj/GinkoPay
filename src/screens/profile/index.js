@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, FlatList, Image, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native'
 import { Container, Content } from 'native-base';
 import Modal from 'react-native-modal';
+import Svg, { Rect, Defs, Use, image, Path, Pattern } from 'react-native-svg';
+
 import Icon from 'react-native-vector-icons/Ionicons'
 import HeaderBackBtnWithLogo from '../../components/HeaderBackArrowWithGinkoPay';
 import { BackgroundColor } from '../../constants/colors';
@@ -12,6 +14,7 @@ import CompaignChannelViewBtn from '../../components/CompaignChannelViewBtn';
 import Compaign from '../../components/compaign';
 import CustomText from '../../components/Text';
 import CustomButton from '../../components/Button';
+import SvgImg from '../../components/Svg';
 
 const Profile = ({ navigation }) => {
 
@@ -274,6 +277,17 @@ const Profile = ({ navigation }) => {
                             </TouchableOpacity>
                         </View>
 
+                        {/* <SvgImg /> */}
+
+                        <TouchableOpacity style={styles.LargeUploadBtn}>
+
+                            <CustomText text="Upload"
+                                locations={[0, 1,]} colors={["#72F6D1", "#FED365"]}
+                                style={{ fontSize: 35, fontWeight: "bold", textAlign: "center" }} />
+                        </TouchableOpacity>
+                        <View style={{ margin: 20 }}>
+                            <Text style={{ color: '#ABAFC4' }}>Upload a backgroud image for your{'\n'}banner. Choose a good quality.</Text>
+                        </View>
 
 
 
@@ -357,6 +371,14 @@ const styles = StyleSheet.create({
         borderWidth: 1, borderRadius: 20,
         margin: 10,
         alignSelf: 'flex-end'
+    },
+    LargeUploadBtn:
+    {
+        width: '90%', alignSelf: 'center',
+        borderColor: '#2A2D3C',
+        borderRadius: 10, justifyContent: 'center',
+        backgroundColor: '#2A2D3C',
+        borderWidth: 1, height: 110
     },
     createYourOwnDescription:
     {
