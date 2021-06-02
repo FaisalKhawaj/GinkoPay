@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, FlatList, Image, StyleSheet, Modal, TouchableOpacity, ImageBackground } from 'react-native'
+import { View, Text, TextInput, FlatList, Image, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native'
 import { Container, Content } from 'native-base';
+import Modal from 'react-native-modal';
 import Icon from 'react-native-vector-icons/Ionicons'
 import HeaderBackBtnWithLogo from '../../components/HeaderBackArrowWithGinkoPay';
 import { BackgroundColor } from '../../constants/colors';
@@ -18,6 +19,7 @@ const Profile = ({ navigation }) => {
     const [showCompaignModal, setShowCompaignModal] = useState(false);
     const [showBannerModal, setShowBannerModal] = useState(false)
     const [btnSelect, setBtnSelect] = useState('Compaign')
+
     const [CompaignList, setCompaignsList] = useState([
         {
             id: 1,
@@ -72,6 +74,7 @@ const Profile = ({ navigation }) => {
         setShowCompaign(!showCompaign)
     }
     const CreateBannerHandler = () => {
+        setShowBannerModal(!showBannerModal)
         console.log('Banner')
     }
     const AddCompaignHandler = () => {
@@ -177,13 +180,15 @@ const Profile = ({ navigation }) => {
                 <Modal
                     animationType="slide"
                     transparent={true}
+                    style={{ alignSelf: 'center', backgroundColor: '#17171A', width: '100%' }}
+                    coverScreen={true}
                     visible={showCompaignModal}
-                    onRequestClose={() => {
-                        Alert.alert("Modal has been closed.");
-                        setModalVisible(!modalVisible);
-                    }}
+                    hasBackdrop={true}
+                    onBackdropPress={() => setShowCompaignModal(false)}
                 >
-                    <View style={{ flex: 1, backgroundColor: '#17171A', }}>
+
+
+                    <View style={{ flex: 1, justifyContent: 'center', }}>
 
                         <TouchableOpacity style={styles.circleCloseBtn}
                             onPress={() => setShowCompaignModal(false)}>
@@ -240,6 +245,67 @@ const Profile = ({ navigation }) => {
                 </Modal>
 
 
+                <Modal
+                    animationType="slide"
+                    transparent={true}
+                    style={{ alignSelf: 'center', backgroundColor: '#17171A', width: '100%' }}
+                    coverScreen={true}
+                    visible={showBannerModal}
+                    hasBackdrop={true}
+                    onBackdropPress={() => setShowBannerModal(false)}
+                >
+
+
+                    <View style={{ flex: 1, justifyContent: 'center', }}>
+
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+
+                            <TouchableOpacity
+                                onPress={() => setShowBannerModal(false)}>
+                                <Icon name="chevron-back-outline" size={20} color="#FFFF" />
+                            </TouchableOpacity>
+
+                            <Text style={{ color: '#FFFF' }}>Create</Text>
+
+                            <TouchableOpacity style={styles.circleCloseBtn}
+                                onPress={() => setShowBannerModal(false)}>
+                                <Image style={{ tintColor: "#FFFF" }}
+                                    source={require('../../assets/closecircle.png')} />
+                            </TouchableOpacity>
+                        </View>
+
+
+
+
+
+
+                        <View style={{ marginTop: 20, marginLeft: 15 }}>
+                            <Text style={styles.compaignTitle}>Compaign Title</Text>
+                        </View>
+
+
+                        <TextInput placeholder="Add a title"
+                            placeholderTextColor="#888DAA"
+                            style={mystyles.simpleTextInput}
+                        />
+
+                        <View style={{ marginTop: 20, marginLeft: 15 }}>
+                            <Text style={styles.compaignTitle}>Paste your own wallet address</Text>
+                        </View>
+                        <TextInput placeholder="Public addres(0x),or ENS"
+                            placeholderTextColor="#888DAA"
+                            style={mystyles.simpleTextInput}
+                        />
+
+
+                        <View style={{ marginVertical: 10 }}>
+                            <CustomButton text={"Next"} onPress={CreateCompaignHandler} />
+                        </View>
+
+                    </View>
+                </Modal>
+
+
 
 
 
@@ -265,6 +331,12 @@ const styles = StyleSheet.create({
         padding: 15,
         flexDirection: 'row'
     },
+    compaignTitle:
+    {
+        fontSize: 16,
+        fontFamily: 'Poppins-Regular',
+        color: '#FFFF'
+    },
     UserUsernameView:
     {
         marginHorizontal: 10,
@@ -283,7 +355,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#000000',
         borderColor: '#000000',
         borderWidth: 1, borderRadius: 20,
-        margin: 10, alignSelf: 'flex-end'
+        margin: 10,
+        alignSelf: 'flex-end'
     },
     createYourOwnDescription:
     {
