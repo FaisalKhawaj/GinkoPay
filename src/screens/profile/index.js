@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, FlatList, Image, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native'
-import { Container, Content } from 'native-base';
+import { Container, Content, Thumbnail } from 'native-base';
 import Modal from 'react-native-modal';
 import Svg, { Rect, Defs, Use, image, Path, Pattern } from 'react-native-svg';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 import Icon from 'react-native-vector-icons/Ionicons'
 import HeaderBackBtnWithLogo from '../../components/HeaderBackArrowWithGinkoPay';
@@ -70,6 +71,7 @@ const Profile = ({ navigation }) => {
     const [compaignTitle, setCompaignTitle] = useState('');
     const [compaignError, setCompaignError] = useState('');
     const [showDonationDialog, setShowDonationDialog] = useState(false)
+    const [ReferalModal, setReferalModal] = useState(false)
     const CompaignHandler = () => {
         console.log(showCompaign)
         setShowCompaign(!showCompaign)
@@ -88,7 +90,9 @@ const Profile = ({ navigation }) => {
     }
     const CreateCompaignHandler = () => {
         setShowDonationDialog(!showDonationDialog)
-        alert('CompaignCreated')
+    }
+    const DonationNextBtnHandler = () => {
+        setReferalModal(!ReferalModal)
     }
     return (
         <Container style={{ backgroundColor: BackgroundColor }}>
@@ -381,10 +385,159 @@ const Profile = ({ navigation }) => {
 
 
                         <View style={{ flex: 1, marginBottom: 50, justifyContent: 'flex-end' }}>
-                            <CustomButton text={"Next"} onPress={CreateCompaignHandler} />
+                            <CustomButton text={"Next"} onPress={DonationNextBtnHandler} />
                         </View>
 
                     </View>
+                </Modal>
+
+
+                <Modal
+                    animationType="slide"
+                    transparent={true}
+                    style={{
+                        //  backgroundColor: '#17171A',
+                        alignSelf: 'center',
+                        width: '100%'
+                    }}
+                    visible={ReferalModal} >
+                    <View style={styles.referCodeModalMainView}>
+
+                        <View style={styles.shareModalCloseBtnView}>
+
+                            <Image resizeMode="contain"
+                                source={require('../../assets/ShareIcon.png')} />
+
+                            <Text style={styles.shareLinkText}>https://ginkopay.app.link/send/0xBBB6A12945aC14C84185a17C6BD2eAe96e</Text>
+
+
+                            <TouchableOpacity
+                                style={styles.circleCloseBtn}
+                                onPress={() => setReferalModal(!ReferalModal)}>
+                                <Image resizeMode="contain" source={require('../../assets/closecircle.png')} />
+                            </TouchableOpacity>
+                        </View>
+
+                        <View style={styles.shareListView}>
+                            <TouchableOpacity>
+                                <Image resizeMode="contain" source={require('../../assets/AppleMacMini.png')} />
+                                <Text style={styles.shareText}>
+                                    Apple Mac {'\n'}  mini
+      </Text>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity style={{ alignSelf: 'center' }}>
+                                <View >
+                                    <Thumbnail resizeMode="contain"
+                                        source={require('../../assets/Messageprofile.png')} />
+                                    <Image
+                                        style={{ position: 'absolute', bottom: 2, right: 2 }}
+                                        resizeMode="contain"
+                                        source={require('../../assets/messageIcon.png')} />
+                                </View>
+
+                                <Text style={styles.shareText}>
+                                    Arlene{'\n'}McCoy
+      </Text>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity style={{ alignSelf: 'center' }}>
+                                <View style={{}}>
+                                    <Thumbnail resizeMode="contain"
+                                        source={require('../../assets/grouppp.png')} />
+
+                                    <Thumbnail resizeMode="contain"
+                                        style={{ position: 'absolute', top: 15, right: -20 }}
+                                        source={require('../../assets/groupupper.png')} />
+
+                                    <Image
+                                        style={{
+                                            position: 'absolute',
+                                            bottom: -10, right: -20
+                                        }}
+                                        resizeMode="contain"
+                                        source={require('../../assets/messageIcon.png')} />
+                                </View>
+                                <View style={{ marginTop: 10 }}>
+
+                                    <Text style={styles.shareText}>
+                                        Fellows
+      </Text>
+                                    <Text style={[styles.shareText, { color: '#ABABB0' }]}>
+                                        2 People
+      </Text>
+                                </View>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity style={{ alignSelf: 'center' }}>
+                                <View >
+                                    <Image resizeMode="contain"
+                                        source={require('../../assets/circleProfile.png')} />
+                                    <Image
+                                        style={{ position: 'absolute', bottom: 2, right: 2 }}
+                                        resizeMode="contain"
+                                        source={require('../../assets/messageIcon.png')} />
+                                </View>
+
+                                <Text style={styles.shareText}>
+                                    First Last
+      </Text>
+                            </TouchableOpacity>
+                        </View>
+
+
+
+                        <View style={styles.shareListView}>
+                            <TouchableOpacity>
+                                <Image resizeMode="contain" source={require('../../assets/instaPink.png')} />
+                                <Text style={styles.shareText}>
+                                    Instagram
+      </Text>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity style={{ alignSelf: 'center' }}>
+                                <View >
+
+                                    <Image
+
+                                        resizeMode="contain"
+                                        source={require('../../assets/Messages.png')} />
+                                </View>
+
+                                <Text style={styles.shareText}>
+                                    Messages
+      </Text>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity style={{ alignSelf: 'center' }}>
+
+
+
+                                <Image resizeMode="contain" source={require('../../assets/WhatsAppGreen.png')} />
+
+                                <Text style={styles.shareText}>
+                                    Whatsapp
+      </Text>
+
+
+                            </TouchableOpacity>
+
+                            <TouchableOpacity style={{ alignSelf: 'center' }}>
+                                <View>
+                                    <Image resizeMode="contain" source={require('../../assets/TwitchPurple.png')} />
+                                </View>
+
+                                <Text style={styles.shareText}>
+                                    Twitch
+                               </Text>
+                            </TouchableOpacity>
+                        </View>
+
+
+
+
+                    </View>
+
                 </Modal>
 
 
@@ -473,6 +626,44 @@ const styles = StyleSheet.create({
         fontSize: 12,
         fontFamily: 'Poppins-Bold',
         color: '#FFFF'
+    },
+    shareText:
+    {
+        fontSize: 12,
+        color: '#FFFF',
+        fontFamily: 'Roboto-Regular',
+        textAlign: 'center'
+    },
+    shareListView:
+    {
+        flexDirection: "row",
+        marginHorizontal: 10,
+        justifyContent: 'space-between',
+        padding: 10,
+    },
+    referCodeModalMainView:
+    {
+        position: 'absolute',
+        // height: 150,
+        borderTopRightRadius: 15,
+        borderTopLeftRadius: 15,
+        bottom: 0, width: wp('100%'),
+        backgroundColor: '#17171A'
+    },
+    shareModalCloseBtnView:
+    {
+        padding: 25,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        // backgroundColor: 'red',
+        // marginVertical: 15,
+        marginHorizontal: 10,
+    },
+    shareLinkText:
+    {
+        color: '#ABABB0',
+        fontSize: 12,
+        alignSelf: 'center'
     }
 
 })
