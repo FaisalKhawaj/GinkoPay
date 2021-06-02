@@ -15,6 +15,7 @@ import Compaign from '../../components/compaign';
 import CustomText from '../../components/Text';
 import CustomButton from '../../components/Button';
 import SvgImg from '../../components/Svg';
+import DoneSvg from '../../components/DoneSvg';
 
 const Profile = ({ navigation }) => {
 
@@ -68,6 +69,7 @@ const Profile = ({ navigation }) => {
     ])
     const [compaignTitle, setCompaignTitle] = useState('');
     const [compaignError, setCompaignError] = useState('');
+    const [showDonationDialog, setShowDonationDialog] = useState(false)
     const CompaignHandler = () => {
         console.log(showCompaign)
         setShowCompaign(!showCompaign)
@@ -85,6 +87,7 @@ const Profile = ({ navigation }) => {
         console.log('Compaign')
     }
     const CreateCompaignHandler = () => {
+        setShowDonationDialog(!showDonationDialog)
         alert('CompaignCreated')
     }
     return (
@@ -255,9 +258,7 @@ const Profile = ({ navigation }) => {
                     coverScreen={true}
                     visible={showBannerModal}
                     hasBackdrop={true}
-                    onBackdropPress={() => setShowBannerModal(false)}
-                >
-
+                    onBackdropPress={() => setShowBannerModal(false)}  >
 
                     <View style={{ flex: 1, justifyContent: 'center', }}>
 
@@ -268,7 +269,7 @@ const Profile = ({ navigation }) => {
                                 <Icon name="chevron-back-outline" size={20} color="#FFFF" />
                             </TouchableOpacity>
 
-                            <Text style={{ color: '#FFFF' }}>Create</Text>
+                            <Text style={{ fontFamily: 'Poppins-SemiBold', color: '#FFFF' }}>Create</Text>
 
                             <TouchableOpacity style={styles.circleCloseBtn}
                                 onPress={() => setShowBannerModal(false)}>
@@ -277,7 +278,7 @@ const Profile = ({ navigation }) => {
                             </TouchableOpacity>
                         </View>
 
-                        {/* <SvgImg /> */}
+                        <SvgImg />
 
                         <TouchableOpacity style={styles.LargeUploadBtn}>
 
@@ -313,6 +314,73 @@ const Profile = ({ navigation }) => {
 
 
                         <View style={{ marginVertical: 10 }}>
+                            <CustomButton text={"Next"} onPress={CreateCompaignHandler} />
+                        </View>
+
+                    </View>
+                </Modal>
+
+
+                <Modal
+                    animationType="slide"
+                    transparent={true}
+                    style={{ alignSelf: 'center', backgroundColor: '#17171A', width: '100%' }}
+                    coverScreen={true}
+                    visible={showDonationDialog}
+                    hasBackdrop={true}
+                    onBackdropPress={() => setShowDonationDialog(false)}  >
+
+                    <View style={{ flex: 1, justifyContent: 'center', }}>
+
+                        <View style={{ marginVertical: 5, flexDirection: 'row', justifyContent: 'space-between' }}>
+
+                            <TouchableOpacity
+                                onPress={() => setShowBannerModal(false)}>
+                                <Icon name="chevron-back-outline" size={20} color="#FFFF" />
+                            </TouchableOpacity>
+
+                            <Text style={{ fontFamily: 'Poppins-SemiBold', color: '#FFFF' }}>Create</Text>
+
+                            <TouchableOpacity style={styles.circleCloseBtn}
+                                onPress={() => setShowDonationDialog(false)}>
+                                <Image style={{ tintColor: "#FFFF" }}
+                                    source={require('../../assets/closecircle.png')} />
+                            </TouchableOpacity>
+                        </View>
+
+
+                        <DoneSvg />
+
+                        <ImageBackground style={{ width: '100%', justifyContent: 'center', height: 140 }}
+                            source={require('../../assets/bluelightkeyboard.png')}>
+
+                            <CustomText text="TEAM ITALIA"
+                                locations={[0, 1,]} colors={["#72F6D1", "#FED365"]}
+                                style={{ fontSize: 35, fontWeight: 'Poppins-Bold', fontWeight: "bold", textAlign: "center" }} />
+
+                        </ImageBackground>
+
+
+                        <View style={{ margin: 20 }}>
+                            <Text style={{ color: '#ABAFC4' }}>Your banner is ready to send to your{'\n'}friends. All donations will be received on the{'\n'}wallet address what you added</Text>
+                        </View>
+
+
+
+
+
+
+
+                        <View style={{ marginTop: 20, marginLeft: 15 }}>
+                            <Text style={styles.compaignTitle}>Donations will go to this wallet</Text>
+                        </View>
+                        <TextInput placeholder="395a2a6349e069ab44043f01d77cf7b91822b\n1841e333128d98f7878495bf53"
+                            placeholderTextColor="#888DAA"
+                            style={mystyles.simpleTextInput}
+                        />
+
+
+                        <View style={{ flex: 1, marginBottom: 50, justifyContent: 'flex-end' }}>
                             <CustomButton text={"Next"} onPress={CreateCompaignHandler} />
                         </View>
 
