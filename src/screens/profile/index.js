@@ -4,6 +4,7 @@ import { Container, Content, Thumbnail } from 'native-base';
 import Modal from 'react-native-modal';
 import Svg, { Rect, Defs, Use, image, Path, Pattern } from 'react-native-svg';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import { BlurView, VibrancyView } from "@react-native-community/blur";
 
 import Icon from 'react-native-vector-icons/Ionicons'
 import HeaderBackBtnWithLogo from '../../components/HeaderBackArrowWithGinkoPay';
@@ -94,6 +95,7 @@ const Profile = ({ navigation }) => {
     const DonationNextBtnHandler = () => {
         setReferalModal(!ReferalModal)
     }
+    console.log("Comp  " + showCompaignModal + " Banner  " + showBannerModal + " referal  " + ReferalModal)
     return (
         <Container style={{ backgroundColor: BackgroundColor }}>
             <Content contentContainerStyle={{
@@ -252,6 +254,15 @@ const Profile = ({ navigation }) => {
                         </View>
 
                     </View>
+                    {ReferalModal && showDonationDialog ?
+                        <BlurView
+                            style={styles.absolute}
+                            blurType="light"
+                            blurRadius={10}
+                            blurAmount={10}
+                            reducedTransparencyFallbackColor="#222531"
+                        />
+                        : null}
                 </Modal>
 
 
@@ -322,6 +333,15 @@ const Profile = ({ navigation }) => {
                         </View>
 
                     </View>
+                    {ReferalModal && showDonationDialog ?
+                        <BlurView
+                            style={styles.absolute}
+                            blurType="light"
+                            blurRadius={10}
+                            blurAmount={10}
+                            reducedTransparencyFallbackColor="#222531"
+                        />
+                        : null}
                 </Modal>
 
 
@@ -389,6 +409,16 @@ const Profile = ({ navigation }) => {
                         </View>
 
                     </View>
+
+                    {ReferalModal && showDonationDialog ?
+                        <BlurView
+                            style={styles.absolute}
+                            blurType="light"
+                            blurRadius={10}
+                            blurAmount={10}
+                            reducedTransparencyFallbackColor="#222531"
+                        />
+                        : null}
                 </Modal>
 
 
@@ -487,7 +517,7 @@ const Profile = ({ navigation }) => {
 
 
 
-                        <View style={styles.shareListView}>
+                        <View style={[styles.shareListView, { marginBottom: 40 }]}>
                             <TouchableOpacity>
                                 <Image resizeMode="contain" source={require('../../assets/instaPink.png')} />
                                 <Text style={styles.shareText}>
@@ -510,8 +540,6 @@ const Profile = ({ navigation }) => {
                             </TouchableOpacity>
 
                             <TouchableOpacity style={{ alignSelf: 'center' }}>
-
-
 
                                 <Image resizeMode="contain" source={require('../../assets/WhatsAppGreen.png')} />
 
@@ -540,7 +568,15 @@ const Profile = ({ navigation }) => {
 
                 </Modal>
 
-
+                {ReferalModal && showDonationDialog ?
+                    <BlurView
+                        style={styles.absolute}
+                        blurType="light"
+                        blurRadius={10}
+                        blurAmount={10}
+                        reducedTransparencyFallbackColor="#222531"
+                    />
+                    : null}
 
 
 
@@ -637,7 +673,7 @@ const styles = StyleSheet.create({
     shareListView:
     {
         flexDirection: "row",
-        marginHorizontal: 10,
+        marginVertical: 20,
         justifyContent: 'space-between',
         padding: 10,
     },
@@ -647,23 +683,31 @@ const styles = StyleSheet.create({
         // height: 150,
         borderTopRightRadius: 15,
         borderTopLeftRadius: 15,
-        bottom: 0, width: wp('100%'),
+        bottom: -23,
+        width: wp('100%'),
         backgroundColor: '#17171A'
     },
     shareModalCloseBtnView:
     {
-        padding: 25,
+        paddingVertical: 15,
         flexDirection: 'row',
         justifyContent: 'center',
         // backgroundColor: 'red',
-        // marginVertical: 15,
-        marginHorizontal: 10,
+        marginVertical: 10,
+        // marginHorizontal: 0,
     },
     shareLinkText:
     {
         color: '#ABABB0',
         fontSize: 12,
         alignSelf: 'center'
+    },
+    absolute: {
+        position: "absolute",
+        top: 0,
+        left: 0,
+        bottom: 10,
+        right: 0
     }
 
 })
