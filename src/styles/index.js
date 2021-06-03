@@ -19,6 +19,10 @@ export const mystyles = StyleSheet.create(
             marginVertical: 10,
             color: '#FFFF', borderColor: '#FAFAFA',
             borderWidth: 0.2, borderRadius: 5,
+        },
+        HeaderText:
+        {
+            fontSize: 16, fontFamily: 'Poppins-SemiBold', color: '#FFFFFF'
         }
     }
 )

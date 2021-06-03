@@ -15,6 +15,8 @@ import KycNeed from '../screens/kycneed'
 import DashBoardScreen from '../screens/dashboard'
 import CompaignMainPage from '../screens/Compaign';
 import Profile from '../screens/Profile';
+import Settings from '../screens/Settings';
+import Preferences from '../screens/Preferences';
 
 const RootStack = createStackNavigator();
 enableScreens()
@@ -24,7 +26,7 @@ const RootStackScreen = ({ navigation }) => {
             screenOptions={{
                 headerShown: false
             }}
-            initialRouteName={"Profile"}
+            initialRouteName={"Settings"}
         >
             <RootStack.Screen
                 name="SliderScreenOne"
@@ -76,6 +78,16 @@ const RootStackScreen = ({ navigation }) => {
             <RootStack.Screen
                 name="Profile"
                 component={Profile}
+            />
+
+            <RootStack.Screen
+                name="Settings"
+                component={Settings}
+            />
+
+            <RootStack.Screen
+                name="Preferences"
+                component={Preferences}
             />
 
 
