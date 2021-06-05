@@ -42,5 +42,12 @@ export const mystyles = StyleSheet.create(
             width: wp('100%'),
             backgroundColor: '#17171A'
         },
+        modalUpperSmallLine:
+        {
+            backgroundColor: "#ffffff",
+            bottom: 10, alignSelf: 'center',
+            height: 4, width: 50,
+            borderRadius: 5
+        }
     }
 )

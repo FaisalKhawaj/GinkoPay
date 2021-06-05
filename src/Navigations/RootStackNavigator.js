@@ -21,13 +21,13 @@ import Preferences from '../screens/Preferences';
 const RootStack = createStackNavigator();
 enableScreens()
 
-const RootStackScreen = ({navigation}) => {
-  return(
-    <RootStack.Navigator 
-       screenOptions={{
-           headerShown:false
-       }}
-        initialRouteName={"DashBoardScreen"}
+const RootStackScreen = ({ navigation }) => {
+    return (
+        <RootStack.Navigator
+            screenOptions={{
+                headerShown: false
+            }}
+            initialRouteName={"Profile"}
 
         >
             <RootStack.Screen
