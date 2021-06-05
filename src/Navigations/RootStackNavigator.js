@@ -20,13 +20,15 @@ import Preferences from '../screens/Preferences';
 
 const RootStack = createStackNavigator();
 enableScreens()
-const RootStackScreen = ({ navigation }) => {
-    return (
-        <RootStack.Navigator
-            screenOptions={{
-                headerShown: false
-            }}
-            initialRouteName={"Settings"}
+
+const RootStackScreen = ({navigation}) => {
+  return(
+    <RootStack.Navigator 
+       screenOptions={{
+           headerShown:false
+       }}
+        initialRouteName={"DashBoardScreen"}
+
         >
             <RootStack.Screen
                 name="SliderScreenOne"

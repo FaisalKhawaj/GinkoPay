@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { Container, Header, Left, Body, Right, Button, Icon, Title, Text } from 'native-base';
-import CustomButton from './Button';
+import {  Header, Left, Body, Right, Button, Icon, Title, Text } from 'native-base';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import LinearGradient from 'react-native-linear-gradient'
 import { LinearGradientColorOne,transparent, LinearGradientColorTwo } from '../constants/colors';
 import { View, Dimensions } from 'react-native';
-const {width, height} = Dimensions.get("screen")
-const  CustomerHeader = () =>  {
+const {width, height} = Dimensions.get("window")
+
+const  CustomerHeader = ({num}) =>  {
     return (
       <View>
         <Header transparent noLeft>
@@ -19,19 +19,19 @@ const  CustomerHeader = () =>  {
           <LinearGradient 
                 start={{x: 0, y: 0}} end={{x: 1, y: 0}}
                 colors={[LinearGradientColorOne,LinearGradientColorTwo]} 
-                style={{width:width/5, borderRadius:10, height:10}}>
+                style={{width:width/5, borderRadius:2, height:10}}>
             </LinearGradient>
             <LinearGradient 
                 start={{x: 0, y: 0}} end={{x: 1, y: 0}}
-                colors={[LinearGradientColorOne,LinearGradientColorTwo]} 
-                style={{width:width/5, borderRadius:10, height:10}}>
+                colors={num >1 ?[LinearGradientColorOne,LinearGradientColorTwo]:["#222531","#222531"]} 
+                style={{width:width/5, borderRadius:2, height:10}}>
             </LinearGradient>
             <LinearGradient 
                 start={{x: 0, y: 0}} end={{x: 1, y: 0}}
-                colors={[LinearGradientColorOne,LinearGradientColorTwo]} 
-                style={{width:width/5, borderRadius:10, height:10}}>
+                colors={num >2 ?[LinearGradientColorOne,LinearGradientColorTwo]:["#222531","#222531"]}
+                style={{width:width/5, borderRadius:2, height:10}}>
             </LinearGradient>
-            <Text style={{color:"#fff",  fontSize:12,}}>1/3</Text>
+            <Text style={{color:"#7C81A2",  fontSize:12,}}>{num}/3</Text>
           </Body>
         </Header>
       </View>

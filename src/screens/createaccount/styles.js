@@ -1,15 +1,16 @@
 import {StyleSheet , Dimensions} from 'react-native'
-import { BackgroundColor } from '../../constants/colors';
-const {width, height} = Dimensions.get("screen");
-console.log(height)
+import { BackgroundColor, graycolor, lightgray } from '../../constants/colors';
+import {simpletext, fontmedium, boldtext} from '../../constants/fonts'
+const {width, height} = Dimensions.get("window");
 const styles = StyleSheet.create({
     container:{
         backgroundColor:BackgroundColor
     },
     textinput:{
         backgroundColor:BackgroundColor, 
-        fontWeight:"bold", 
-        color:"#E5E5E5", 
+        //fontWeight:"bold",
+        fontFamily:fontmedium, 
+        color:lightgray, 
         marginHorizontal:10, 
         marginVertical:10,
         height:50, 
