@@ -95,13 +95,16 @@ const Profile = ({ navigation }) => {
     const DonationNextBtnHandler = () => {
         setReferalModal(!ReferalModal)
     }
+    const BackBtnHandler = () => {
+        navigation.goBack()
+    }
     console.log("Comp  " + showCompaignModal + " Banner  " + showBannerModal + " referal  " + ReferalModal)
     return (
         <Container style={{ backgroundColor: BackgroundColor }}>
             <Content contentContainerStyle={{
                 backgroundColor: BackgroundColor
             }}>
-                <HeaderBackBtnWithLogo />
+                <HeaderBackBtnWithLogo backBtn={BackBtnHandler} />
 
                 <View style={styles.MainUserSettingsView}>
 
@@ -112,7 +115,9 @@ const Profile = ({ navigation }) => {
                         <Text style={styles.Username}>Team Italia</Text>
                     </View>
 
-                    <TouchableOpacity style={{ alignSelf: 'center' }}>
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate('Settings')}
+                        style={{ alignSelf: 'center' }}>
                         <Image source={require('../../assets/settings.png')} />
                     </TouchableOpacity>
 
@@ -256,7 +261,7 @@ const Profile = ({ navigation }) => {
                     </View>
                     {ReferalModal && showDonationDialog ?
                         <BlurView
-                            style={styles.absolute}
+                            style={mystyles.absolute}
                             blurType="light"
                             blurRadius={10}
                             blurAmount={10}
@@ -335,7 +340,7 @@ const Profile = ({ navigation }) => {
                     </View>
                     {ReferalModal && showDonationDialog ?
                         <BlurView
-                            style={styles.absolute}
+                            style={mystyles.absolute}
                             blurType="light"
                             blurRadius={10}
                             blurAmount={10}
@@ -412,7 +417,7 @@ const Profile = ({ navigation }) => {
 
                     {ReferalModal && showDonationDialog ?
                         <BlurView
-                            style={styles.absolute}
+                            style={mystyles.absolute}
                             blurType="light"
                             blurRadius={10}
                             blurAmount={10}
@@ -431,7 +436,7 @@ const Profile = ({ navigation }) => {
                         width: '100%'
                     }}
                     visible={ReferalModal} >
-                    <View style={styles.referCodeModalMainView}>
+                    <View style={mystyles.referCodeModalMainView}>
 
                         <View style={styles.shareModalCloseBtnView}>
 
@@ -570,7 +575,7 @@ const Profile = ({ navigation }) => {
 
                 {ReferalModal && showDonationDialog ?
                     <BlurView
-                        style={styles.absolute}
+                        style={mystyles.absolute}
                         blurType="light"
                         blurRadius={10}
                         blurAmount={10}
@@ -677,16 +682,16 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         padding: 10,
     },
-    referCodeModalMainView:
-    {
-        position: 'absolute',
-        // height: 150,
-        borderTopRightRadius: 15,
-        borderTopLeftRadius: 15,
-        bottom: -23,
-        width: wp('100%'),
-        backgroundColor: '#17171A'
-    },
+    // referCodeModalMainView:
+    // {
+    //     position: 'absolute',
+    //     // height: 150,
+    //     borderTopRightRadius: 15,
+    //     borderTopLeftRadius: 15,
+    //     bottom: -23,
+    //     width: wp('100%'),
+    //     backgroundColor: '#17171A'
+    // },
     shareModalCloseBtnView:
     {
         paddingVertical: 15,
@@ -702,12 +707,6 @@ const styles = StyleSheet.create({
         fontSize: 12,
         alignSelf: 'center'
     },
-    absolute: {
-        position: "absolute",
-        top: 0,
-        left: 0,
-        bottom: 10,
-        right: 0
-    }
+
 
 })

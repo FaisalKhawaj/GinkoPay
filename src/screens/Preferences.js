@@ -8,11 +8,14 @@ import BackBtnWithMiddleText from '../components/BackBtnMiddleText';
 import PreferencesTitleDescriptionArrowBtn from '../components/PreferencesTitleDescriptionArrowBtn';
 
 const Preferences = ({ navigation }) => {
+    const BackBtnHandler = () => {
+        navigation.goBack()
+    }
     return (
         <Container style={{ backgroundColor: BackgroundColor }}>
             <Content contentContainerStyle={{ backgroundColor: BackgroundColor }} >
 
-                <BackBtnWithMiddleText text="Preferences" navigation={navigation} />
+                <BackBtnWithMiddleText text="Preferences" backBtn={BackBtnHandler} navigation={navigation} />
                 <View style={{ marginTop: 40 }}>
                     <PreferencesTitleDescriptionArrowBtn title="General"
                         description={"Currency conversion, primary currency\n,language and search engine"}
