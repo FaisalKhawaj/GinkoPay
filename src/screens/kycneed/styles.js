@@ -1,12 +1,11 @@
 import {StyleSheet , Dimensions} from 'react-native'
 import { BackgroundColor } from '../../constants/colors';
-const {width, height} = Dimensions.get("screen");
+const {width, height} = Dimensions.get("window");
 const styles = StyleSheet.create({
     container:{
         flex:1,
         width:width,
         height:height,
-       
         backgroundColor:BackgroundColor
     },
     textinput:{

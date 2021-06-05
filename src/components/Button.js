@@ -3,7 +3,7 @@ import { Text,StyleSheet,Dimensions, TouchableOpacity } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient'
 import { LinearGradientColorOne,transparent, LinearGradientColorTwo } from '../constants/colors';
 const window  = Dimensions.get("window");
-import {simpletext } from '../constants/fonts'
+import {boldtext, fontmedium, simpletext } from '../constants/fonts'
 const CustomButton = (props) => {
   const [dimensions, setDimensions] = useState({ window  });
   useEffect(() => {
@@ -41,9 +41,8 @@ const CustomButton = (props) => {
    },
    text:{
       fontSize:18,
-      fontWeight:"bold",
-      fontFamily:simpletext,
-      color:"rgba(0,0,0,.7)"
+      fontFamily:boldtext,
+      color:"rgba(0,0,0,.9)"
    }
  })
  

@@ -17,7 +17,7 @@ import { simpletext } from '../../constants/fonts';
                 <Image source={require("../../assets/slider4.png")} style={{width:width/1.3, height:width/1.3, resizeMode:"cover"}} />
                 <CustomText 
                     text={"Your own\nCrypto Wallet"} 
-                    locations={[0,.3,4,5,100]} colors={["#A9CDFF", "#72F6D1","#A0ED8D","#FED365","#FAA49E"]} 
+                    locations={[0,.3,.4,.5,1]} colors={["#A9CDFF", "#72F6D1","#A0ED8D","#FED365","#FAA49E"]} 
                     style={{fontSize:40,textAlign:"center"}}
                 />
                 <View style={{height:50}} />
