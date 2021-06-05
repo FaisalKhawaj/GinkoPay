@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Container, Content, Thumbnail } from 'native-base'
-import { View, Text, Image, TouchableOpacity, StyleSheet, TextInput } from 'react-native'
+import { View, Text, Image, TouchableOpacity, Dimensions, StyleSheet, TextInput } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 import LinearGradient from 'react-native-linear-gradient'
 import Modal from 'react-native-modal';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import ImagePicker from 'react-native-image-crop-picker';
 
 import { BackgroundColor, LinearGradientColorOne, LinearGradientColorTwo } from '../../constants/colors';
 import styles from '../slidescreenone/styles';
@@ -13,7 +14,7 @@ import { BlurView, VibrancyView } from "@react-native-community/blur";
 import BackBtnWithMiddleText from '../../components/BackBtnMiddleText';
 import CustomButton from '../../components/Button';
 import { mystyles } from '../../styles';
-
+const { width, height } = Dimensions.get('window');
 const Settings = ({ navigation }) => {
 
     const EditProfileHandler = () => {
@@ -45,6 +46,20 @@ const Settings = ({ navigation }) => {
         navigation.navigate('Profile')
     }
     const [showEditProfileModal, setShowEditProfileModal] = useState(false)
+    const [ProfileImg, setProfileImg] = useState('')
+    const openPicker = () => {
+        ImagePicker.openPicker({
+            width: 300,
+            height: 400,
+            cropping: true
+        }).then(image => {
+            setProfileImg(image.path)
+
+        }).catch((error) => {
+            console.log(error)
+        })
+    }
+    console.log(ProfileImg)
     return (
         <Container style={{ backgroundColor: BackgroundColor }}>
             <Content contentContainerStyle={{ backgroundColor: BackgroundColor }}>
@@ -98,17 +113,24 @@ const Settings = ({ navigation }) => {
                     animationType="slide"
                     transparent={true}
                     style={{ alignSelf: 'center', width: '100%' }}
-
+                    coverScreen={true}
+                    animationOut="slideOutDown"
                     visible={showEditProfileModal}
                 // hasBackdrop={true}
                 // onBackdropPress={() => setShowEditProfileModal(false)}
                 >
-                    <View style={[mystyles.referCodeModalMainView, { height: 390 }]}>
+                    <View style={[mystyles.referCodeModalMainView, { height: height / 1.7, width: width }]}>
+                        <View style={mystyles.modalUpperSmallLine} />
+
                         <BackBtnWithMiddleText text="Choose New Account" backBtn={BackBtnHandler} navigation={navigation} />
                         <View style={{ alignSelf: 'center' }}>
 
                             <View style={mystylesComp.circleImageView}>
+                                {ProfileImg != null ?
+                                    <Image style={{ width: 30, height: 20, borderRadius: 25, }} resizeMode='center'
+                                        source={ProfileImg} /> : null
 
+                                }
                             </View>
                             <Image
                                 style={{ position: 'absolute' }}
@@ -116,7 +138,7 @@ const Settings = ({ navigation }) => {
 
                         </View>
 
-                        <TouchableOpacity style={mystylesComp.chooseAvatarBtn}>
+                        <TouchableOpacity onPress={() => openPicker()} style={mystylesComp.chooseAvatarBtn}>
                             <Text style={mystylesComp.chooseAvatarText}>Choose an Avatar</Text>
                         </TouchableOpacity>
 
