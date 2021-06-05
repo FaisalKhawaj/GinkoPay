@@ -1,0 +1,46 @@
+import { StyleSheet } from 'react-native'
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+
+export const mystyles = StyleSheet.create(
+    {
+        TopRatedRecentBtnText:
+        {
+            color: '#FFFF',
+            fontSize: 16,
+            fontFamily: 'Poppins-Bold'
+        },
+        RecentBtn:
+        {
+            marginLeft: 35
+        },
+        simpleTextInput:
+        {
+            alignSelf: 'center', width: '90%',
+            padding: 15,
+            marginVertical: 10,
+            color: '#FFFF', borderColor: '#FAFAFA',
+            borderWidth: 0.2, borderRadius: 5,
+        },
+        HeaderText:
+        {
+            fontSize: 16, fontFamily: 'Poppins-SemiBold', color: '#FFFFFF'
+        },
+        absolute: {
+            position: "absolute",
+            top: 0,
+            left: 0,
+            bottom: 10,
+            right: 0
+        },
+        referCodeModalMainView:
+        {
+            position: 'absolute',
+            // height: 150,
+            borderTopRightRadius: 15,
+            borderTopLeftRadius: 15,
+            bottom: -23,
+            width: wp('100%'),
+            backgroundColor: '#17171A'
+        },
+    }
+)

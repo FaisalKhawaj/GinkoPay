@@ -1,3 +1,4 @@
+
 import React, {useState} from 'react';
 import { View,  StatusBar,Text,Dimensions,StyleSheet, TouchableOpacity } from 'react-native';
 import { Container,  Content, Form, Item, Input, Label } from 'native-base'
@@ -12,11 +13,12 @@ import { boldtext, fontmedium, simpletext } from '../../constants/fonts';
 const {width, height} = Dimensions.get("window");
 
  const CreateAccountScreen = ({navigation}) => {
-  const [email, setEmail] = useState("");
-  const [emailerror , setEmailError] = useState("");
 
-  const [name , setName] = useState("")
-  const [nameerror, setNameError] =useState("")
+  const [email, setEmail] = useState("");
+  const [emailerror, setEmailError] = useState("");
+
+  const [name, setName] = useState("")
+  const [nameerror, setNameError] = useState("")
 
   const [password, setPassword] = useState("")
   const [passowrderror, setPasswordError] = useState("")
@@ -24,8 +26,10 @@ const {width, height} = Dimensions.get("window");
 
   const [confrimpassword, setConfirmPassword] = useState("")
   const [confirmpasswordwrror, setConfirmPassordError] = useState("")
+
   const [isconfirmpasswordvisible, setisconfirmpasswordvisible] = useState(false);
   
+
   const [checked, setChecked] = React.useState(false);
   const [isModalVisible, setModalVisible] = useState(false);
 
@@ -33,6 +37,7 @@ const {width, height} = Dimensions.get("window");
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
+
 
   const gotonextScreen = () => {
     navigation.navigate("UploadImage")
@@ -227,3 +232,5 @@ const {width, height} = Dimensions.get("window");
       borderRadius:8
     }
  })
+
+ 
