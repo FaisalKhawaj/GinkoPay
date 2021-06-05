@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Text, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient'
-
-import { LinearGradientColorOne,transparent, LinearGradientColorTwo } from '../constants/colors';
-const window  = Dimensions.get("window");
-import {boldtext, fontmedium, simpletext } from '../constants/fonts'
-
 import { LinearGradientColorOne, transparent, LinearGradientColorTwo } from '../constants/colors';
+
+import { boldtext, fontmedium, simpletext } from '../constants/fonts'
 const window = Dimensions.get("window");
-import { simpletext } from '../constants/fonts'
 
 const CustomButton = (props) => {
+
   const [dimensions, setDimensions] = useState({ window });
   useEffect(() => {
     const onChange = ({ window }) => {
@@ -32,25 +29,21 @@ const CustomButton = (props) => {
       </TouchableOpacity>
     </LinearGradient>
   );
-
- export default CustomButton;
- const styles = StyleSheet.create({
-   container:{
-     alignSelf:"center",
-     height:60,
-     justifyContent:"center",
-     alignItems:"center",
-     borderRadius:8,
-     backgroundColor:transparent
-   },
-   text:{
-      fontSize:18,
-      fontFamily:boldtext,
-      color:"rgba(0,0,0,.9)"
-   }
- })
- 
-
-};
-
+}
+export default CustomButton
+const styles = StyleSheet.create({
+  container: {
+    alignSelf: "center",
+    height: 60,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 8,
+    backgroundColor: transparent
+  },
+  text: {
+    fontSize: 18,
+    fontFamily: boldtext,
+    color: "rgba(0,0,0,.9)"
+  }
+})
 
