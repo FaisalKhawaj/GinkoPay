@@ -3,11 +3,11 @@ import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons'
 
 
-const HeaderBackBtnWithLogo = () => {
+const HeaderBackBtnWithLogo = ({ backBtn }) => {
     return (
         <View style={styles.mainView}>
             <View style={{ flex: 1 }}>
-                <TouchableOpacity style={{ width: 40 }}>
+                <TouchableOpacity style={{ width: 40 }} onPress={() => backBtn()}>
                     <Icon name="chevron-back-outline" size={20} color="#FFFF" />
                 </TouchableOpacity>
             </View>
