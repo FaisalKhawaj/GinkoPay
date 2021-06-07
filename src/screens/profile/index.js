@@ -291,7 +291,7 @@ const Profile = ({ navigation }) => {
 
                             <Text style={{ fontFamily: 'Poppins-SemiBold', color: '#FFFF' }}>Create</Text>
 
-                            <TouchableOpacity style={styles.circleCloseBtn}
+                            <TouchableOpacity style={mystyles.circleCloseBtn}
                                 onPress={() => setShowBannerModal(false)}>
                                 <Image style={{ tintColor: "#FFFF" }}
                                     source={require('../../assets/closecircle.png')} />
@@ -370,7 +370,7 @@ const Profile = ({ navigation }) => {
 
                             <Text style={{ fontFamily: 'Poppins-SemiBold', color: '#FFFF' }}>Create</Text>
 
-                            <TouchableOpacity style={styles.circleCloseBtn}
+                            <TouchableOpacity style={mystyles.circleCloseBtn}
                                 onPress={() => setShowDonationDialog(false)}>
                                 <Image style={{ tintColor: "#FFFF" }}
                                     source={require('../../assets/closecircle.png')} />
@@ -447,7 +447,7 @@ const Profile = ({ navigation }) => {
 
 
                             <TouchableOpacity
-                                style={styles.circleCloseBtn}
+                                style={mystyles.circleCloseBtn}
                                 onPress={() => setReferalModal(!ReferalModal)}>
                                 <Image resizeMode="contain" source={require('../../assets/closecircle.png')} />
                             </TouchableOpacity>
@@ -626,14 +626,7 @@ const styles = StyleSheet.create({
     {
         fontSize: 12, fontFamily: 'Poppins-Regular', color: '#ABAFC4'
     },
-    circleCloseBtn:
-    {
-        backgroundColor: '#000000',
-        borderColor: '#000000',
-        borderWidth: 1, borderRadius: 20,
-        margin: 10,
-        alignSelf: 'flex-end'
-    },
+
     LargeUploadBtn:
     {
         width: '90%', alignSelf: 'center',

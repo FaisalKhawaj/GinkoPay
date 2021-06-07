@@ -2,9 +2,9 @@ import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 
-const PreferencesTitleDescriptionArrowBtn = ({ title, description }) => {
+const PreferencesTitleDescriptionArrowBtn = ({ title, showModal, description }) => {
     return (
-        <TouchableOpacity style={{ marginVertical: 20, marginHorizontal: 30 }}>
+        <TouchableOpacity onPress={() => showModal()} style={{ marginVertical: 20, marginHorizontal: 30 }}>
             <Text style={styles.TitleText}>
                 {title}
             </Text>
