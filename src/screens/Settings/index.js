@@ -40,7 +40,7 @@ const Settings = ({ navigation }) => {
         alert('Logout')
     }
     const UpdateHandler = () => {
-        alert('Hi')
+        setShowEditProfileModal(!showEditProfileModal)
     }
     const BackBtnHandler = () => {
         navigation.navigate('Profile')

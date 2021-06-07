@@ -48,6 +48,14 @@ export const mystyles = StyleSheet.create(
             bottom: 10, alignSelf: 'center',
             height: 4, width: 50,
             borderRadius: 5
-        }
+        },
+        circleCloseBtn:
+        {
+            backgroundColor: '#000000',
+            borderColor: '#000000',
+            borderWidth: 1, borderRadius: 20,
+            margin: 10,
+            alignSelf: 'flex-end'
+        },
     }
 )
