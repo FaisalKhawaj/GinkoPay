@@ -27,7 +27,7 @@ const RootStackScreen = ({ navigation }) => {
             screenOptions={{
                 headerShown: false
             }}
-            initialRouteName={"Profile"}
+            initialRouteName={"SliderScreenOne"}
 
         >
             <RootStack.Screen
