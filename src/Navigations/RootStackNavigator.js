@@ -12,11 +12,15 @@ import UploadedImage from '../screens/uploaddedpicture'
 import KycNeed from '../screens/kycneed'
 
 // DashBoard
-import DashBoardScreen from '../screens/dashboard'
+import ProtflioItemExpand from '../screens/ProtflioItemExpand'
 import CompaignMainPage from '../screens/Compaign';
-import Profile from '../screens/Profile';
+import Profile from '../screens/profile';
 import Settings from '../screens/Settings';
 import Preferences from '../screens/Preferences';
+import ChangePassword from '../screens/ChangePassword';
+// RootStack Navigator 
+
+import BottomTabNavigator from './BottomTabNavigator'
 
 const RootStack = createStackNavigator();
 enableScreens()
@@ -27,7 +31,7 @@ const RootStackScreen = ({ navigation }) => {
             screenOptions={{
                 headerShown: false
             }}
-            initialRouteName={"Profile"}
+            initialRouteName={"DashBoardScreen"}
 
         >
             <RootStack.Screen
@@ -69,7 +73,7 @@ const RootStackScreen = ({ navigation }) => {
             />
             <RootStack.Screen
                 name="DashBoardScreen"
-                component={DashBoardScreen}
+                component={BottomTabNavigator}
             />
 
             <RootStack.Screen
@@ -92,7 +96,15 @@ const RootStackScreen = ({ navigation }) => {
                 component={Preferences}
             />
 
+            <RootStack.Screen
+                name="ProtflioItemExpand"
+                component={ProtflioItemExpand}
+            />
 
+            <RootStack.Screen
+                name="ChangePassword"
+                component={ChangePassword}
+            />
         </RootStack.Navigator>
     )
 }

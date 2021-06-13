@@ -107,14 +107,19 @@ const CompaignMainPage = ({ navigation }) => {
         }
 
     ])
+    
     const TopRatedCompaignShowHandler = () => {
         // setBtnSelect('TopRatedCompaign')
         setShowCompaign(!showCompaign)
     }
 
     const [showCompaign, setShowCompaign] = useState(false)
+    
     const RecentCompaignShowHandler = () => {
         setShowCompaign(!showCompaign)
+    }
+    const backBtn = () => {
+
     }
     return (
         <Container style={{ backgroundColor: BackgroundColor }}>
@@ -123,12 +128,12 @@ const CompaignMainPage = ({ navigation }) => {
                 backgroundColor: BackgroundColor
             }}>
 
-                <HeaderBackBtnWithLogo />
+                <HeaderBackBtnWithLogo backBtn={backBtn} />
 
                 <View style={{ marginHorizontal: 10 }}>
                     <Text style={styles.TopCompaignsText}>
                         Top Compaigns
-        </Text>
+                    </Text>
                 </View>
                 <FlatList
                     data={TopCompaigns}

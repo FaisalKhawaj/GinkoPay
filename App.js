@@ -2,11 +2,10 @@ import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import RootStackNavigator from './src/Navigations/RootStackNavigator'
 import { NavigationContainer } from '@react-navigation/native';
-
-
+import { navigationRef } from './src/Navigations/NavigationObject';
 const App = () => {
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef}>
       <RootStackNavigator>
         
       </RootStackNavigator>

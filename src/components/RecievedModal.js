@@ -1,19 +1,24 @@
 import React,{useState} from 'react';
-import { View,FlatList,   Dimensions,StyleSheet, Image, Text, TouchableOpacity, Touchable, StatusBar } from 'react-native';
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
-import Icon from 'react-native-vector-icons/Ionicons';
+import { View,FlatList,   Dimensions,StyleSheet, Image,  TouchableOpacity, Touchable, StatusBar } from 'react-native';
 import Modal from 'react-native-modal';
 import { boldtext, fontmedium, simpletext } from '../constants/fonts';
 import { graycolor, green } from '../constants/colors';
 import CustomButton from './Button';
-import RECIEVED from '../assets/recievemodal.svg'
+import COPY from '../assets/copy.svg'
+import {Container, Content, Text} from 'native-base'
+import CopyLinkModal from './LinkCopyModal'
+import RequestPaymentModal from "./RequestPaymentModal";
+import * as RootNavigation from '../Navigations/NavigationObject';
 const {width, height} = Dimensions.get("window");
 
 
-const AssetsModal = ({visible, setVisible}) => {
-    const gotonextScreen = () => {
-        navigation.navigate("DashBoardScreen")
-     }
+const recievedModal = ({visible, setVisible}) => {
+   const [copylink, setCopyLink] = useState(false)
+   const [requestPayment, setRequestPayment] = useState(false)
+   
+const openRequestModal =() => {
+   setRequestPayment(true)
+}
     return (
         <Modal 
             isVisible={visible}
@@ -30,24 +35,30 @@ const AssetsModal = ({visible, setVisible}) => {
             backdropColor = "#1D1F27"
             backdropOpacity = {.85}
         >
-            <View style={styles.mainview}>
+           <Container>
+            <Content style={styles.mainview} contentContainerStyle={{alignItems:"center", flexGrow:1}}>
                 <View style={{backgroundColor:"#ffffff",bottom:10,height:4,width:50,borderRadius:5}} />
                 <Text style={styles.Receive}> Receive</Text>
-                <RECIEVED  width={150}  height={150}/>
+               <Image source={require("../assets/wallet.png")} style={{width:150,height:150}} />
                 <Text style={styles.otherassets}>Your address to Receive payment</Text>
-                <TouchableOpacity style={{flexDirection:"row", marginVertical:20, backgroundColor:"#2A2D3C", height:40, minWidth:100, paddingHorizontal:20, borderRadius:10}}>
-                <Text style={styles.Receive}> Receive</Text>
-                    <Image 
-                        style={{width:40, height:40, resizeMode:"cover", borderRadius:60,}}
-                        source={{uri:"http://callerapp.net/finder/apis/v1/images/03119998999.jpg"}} />
+                <TouchableOpacity 
+                onPress={() => setCopyLink(true)}
+                style={{flexDirection:"row", marginVertical:20,justifyContent:"center",alignItems:"center", backgroundColor:"#2A2D3C", height:40, minWidth:100, paddingHorizontal:20, borderRadius:10}}>
+                <Text style={styles.Receive}> 0x3Dc6...DfCE</Text>
+                   <COPY /> 
                 </TouchableOpacity>
-                <CustomButton  text={"Request Payment"} onPress={gotonextScreen} />
-            </View>        
+                <View style={{position:"absolute", bottom:20}}>
+                    <CustomButton  text={"Request Payment"} onPress={() => openRequestModal()} />
+                </View>
+            </Content>
+               <CopyLinkModal visible={copylink}  setVisible={setCopyLink} />
+               <RequestPaymentModal visible={requestPayment}  setVisible={setRequestPayment} />
+            </Container>        
         </Modal>
     )
 }
 
-export default AssetsModal;
+export default recievedModal;
 
 const styles = StyleSheet.create({
     modal:{
@@ -59,7 +70,7 @@ const styles = StyleSheet.create({
         width:width,
         bottom:0,
         alignSelf: 'center',
-        alignItems: 'center',
+      
         backgroundColor:'#17171A',
         width:width,
         position:'absolute',

@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
-import { Container, Content, Thumbnail } from 'native-base'
-import { View, Text, Image, TouchableOpacity, Dimensions, StyleSheet, TextInput } from 'react-native'
+import { Container,  Content,  Item,Thumbnail, Input, Label } from 'native-base'
+import { View, Text, Image, TouchableOpacity, Dimensions,Share, StyleSheet, TextInput } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 import LinearGradient from 'react-native-linear-gradient'
 import Modal from 'react-native-modal';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import ImagePicker from 'react-native-image-crop-picker';
 
-import { BackgroundColor, LinearGradientColorOne, LinearGradientColorTwo } from '../../constants/colors';
+import { BackgroundColor, graycolor, LinearGradientColorOne, LinearGradientColorTwo } from '../../constants/colors';
 import styles from '../slidescreenone/styles';
 import SettingsWithImgTextIcon from '../../components/SettingsImgTextArrowBtn';
 import { BlurView, VibrancyView } from "@react-native-community/blur";
 import BackBtnWithMiddleText from '../../components/BackBtnMiddleText';
 import CustomButton from '../../components/Button';
 import { mystyles } from '../../styles';
+import { simpletext } from '../../constants/fonts';
 const { width, height } = Dimensions.get('window');
 const Settings = ({ navigation }) => {
 
@@ -21,11 +22,27 @@ const Settings = ({ navigation }) => {
         setShowEditProfileModal(!showEditProfileModal)
 
     }
-    const ShareMyPublicAddressHandler = () => {
-        alert('Share')
+    const ShareMyPublicAddressHandler = async () => {
+        try {
+            const result = await Share.share({
+              message:
+                'https://ginkopay.app.link/send/0xBBB6A12945aC14C84185a17C6BD2eAe96e',
+            });
+            if (result.action === Share.sharedAction) {
+              if (result.activityType) {
+                // shared with activity type of result.activityType
+              } else {
+                // shared
+              }
+            } else if (result.action === Share.dismissedAction) {
+              // dismissed
+            }
+          } catch (error) {
+            alert(error.message);
+          }
     }
     const ChangePasswordHandler = () => {
-        alert('Pass')
+        navigation.navigate("ChangePassword")
     }
     const PreferenceHandler = () => {
         navigation.navigate('Preferences')
@@ -42,11 +59,14 @@ const Settings = ({ navigation }) => {
     const UpdateHandler = () => {
         setShowEditProfileModal(!showEditProfileModal)
     }
+
     const BackBtnHandler = () => {
         navigation.navigate('Profile')
     }
+    
     const [showEditProfileModal, setShowEditProfileModal] = useState(false)
     const [ProfileImg, setProfileImg] = useState('')
+    const [name, setName] = useState("")
     const openPicker = () => {
         ImagePicker.openPicker({
             width: 300,
@@ -59,7 +79,7 @@ const Settings = ({ navigation }) => {
             console.log(error)
         })
     }
-    console.log(ProfileImg)
+    
     return (
         <Container style={{ backgroundColor: BackgroundColor }}>
             <Content contentContainerStyle={{ backgroundColor: BackgroundColor }}>
@@ -142,18 +162,23 @@ const Settings = ({ navigation }) => {
                             <Text style={mystylesComp.chooseAvatarText}>Choose an Avatar</Text>
                         </TouchableOpacity>
 
-                        <View style={mystylesComp.TextNameTextInputView}>
-                            <Text style={{ color: '#888DAA' }}>Account Name</Text>
-                            <TextInput
-                                style={{ marginTop: -15, fontWeight: 'bold', color: '#FFFF' }}
-                                placeholder="Choose Username" placeholderTextColor="#FFFF" />
-                        </View>
+                        <View style={mystylesComp.textinputmaincontainer}>
+                            <Item stackedLabel 
+                                style={mystylesComp.textinputcontainer}>
+                                <Label style={{color:graycolor, fontFamily:simpletext,backgroundColor:"transparent", fontSize:14,}}>Account Name</Label>
+                                <Input 
+                                    placeholder="Change Username"
+                                    placeholderTextColor="#fff"
+                                    style={mystylesComp.textinput}
+                                    textColor="#fff"
+                                    value={name}
+                                    onChangeText={text => setName(text)}
+                                />
+                            </Item>
+                        </View>                        
                         <View style={{ position: 'absolute', alignSelf: 'center', bottom: 10 }}>
                             <CustomButton text={"Update"} onPress={UpdateHandler} />
                         </View>
-
-
-
                     </View>
                 </Modal>
                 {showEditProfileModal ?
@@ -203,7 +228,8 @@ const mystylesComp = StyleSheet.create({
     chooseAvatarText:
     {
         textAlign: 'center',
-        color: '#FEBF32'
+        color: '#FEBF32',
+        fontFamily:simpletext
     },
     TextNameTextInputView: {
         width: wp('90%'), alignSelf: 'center',
@@ -212,5 +238,34 @@ const mystylesComp = StyleSheet.create({
         marginTop: 20,
         paddingHorizontal: 10,
         borderWidth: 1
-    }
+    },
+    textinputmaincontainer:{
+        width:width-30, 
+        alignSelf:"center",
+        marginVertical:10,
+        height:80,
+      },
+      textinputcontainer:{
+        borderColor:graycolor,
+        borderTopWidth:.5,
+        borderLeftWidth:.5, 
+        borderRightWidth:.5, 
+        borderBottomWidth:.5, 
+        width:width-30, 
+        alignSelf:"center", 
+        borderTopLeftRadius:10,
+        paddingHorizontal:15,
+        borderTopRightRadius:10,
+        borderBottomLeftRadius:10,
+        borderBottomRightRadius:10,
+        backgroundColor:'transparent' ,
+        height:75,
+      },
+      textinput:{
+        fontFamily:simpletext,
+        fontSize:14,
+        color: '#FFF',
+        height:50,
+        backgroundColor:'transparent' 
+      },
 })

@@ -1,245 +1,377 @@
-
 import React,{useState} from 'react';
-import { View,FlatList, StatusBar,  Dimensions,StyleSheet, Image, Text, TouchableOpacity, Touchable } from 'react-native';
-import {Container , Content} from 'native-base'
-import Feather from 'react-native-vector-icons/Feather';
+import { View,FlatList, BackHandler,  Dimensions,StyleSheet, Image, Text, TouchableOpacity, Touchable, ImageBackground, ScrollView } from 'react-native';
+import CustomText from '../../components/Text'
+import {useFocusEffect} from '@react-navigation/native';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import HeaderBackBtnWithLogo from '../../components/HeaderBackArrowWithGinkoPay';
 import { boldtext, simpletext } from '../../constants/fonts';
 import { graycolor, green } from '../../constants/colors';
-import CustomText from '../../components/Text';
+const {width, height} = Dimensions.get("screen");
 
-import SENT from '../../assets/sent.svg'
-import RECIEVED from '../../assets/recieved.svg'
-import BUY from '../../assets/buy.svg'
-import CURRECO from '../../assets/CurrencyEthereum.svg'
-import AssetsModal from '../../components/AssetsModal';
-import SentModal from '../../components/SentModal'
-import RecievedModal from '../../components/RecievedModal'
-const {width, height} = Dimensions.get("window");
-
-
-var obj = [
-{
-  key:1,
-  value: 10,
-  str:'fdfgdfg'
-},
-{
-  key:2,
-  value: 10,
-  str:'dfgdfg'
-},
-{
-  key:3,
-  value: 10,
-  str:'fdgdf'
-},
-{
-  key:4,
-  value: 10,
-  str:'gdfg',
-},
-{
-  key:5,
-  value: 10,
-  str:"dgdfg",
-},
-{
-  key:6,
-  value: 10,
-  str:'gdfg',
-},
+let marketdata = [
+  {
+    key:1,
+    image:require("../../assets/btc.png"),
+    name:"Binance Coin",
+    dollar:"$226.69",
+    percent:+2,
+    title:"19.2371 BNB",
+  },
+  {
+    key:2,
+    image:require("../../assets/coin2.png"),
+    name:"USD Coin",
+    dollar:"$1.00",
+    percent:4.3,
+    title:"92,3 USDC",
+  },
+  {
+    key:3,
+    image:require("../../assets/coin3.png"),
+    name:"Cardano",
+    dollar:"$20.83",
+    percent:-1.3,
+    title:"12.74 ADA",
+  },
+  {
+    key:4,
+    image:require("../../assets/coin3.png"),
+    name:"Cardano",
+    dollar:"$20.83",
+    percent:-1.3,
+    title:"12.74 ADA",
+  },
+  {
+    key:5,
+    image:require("../../assets/coin3.png"),
+    name:"Cardano",
+    dollar:"$20.83",
+    percent:-1.3,
+    title:"12.74 ADA",
+  },
+  {
+    key:6,
+    image:require("../../assets/coin3.png"),
+    name:"Cardano",
+    dollar:"$20.83",
+    percent:-1.3,
+    title:"12.74 ADA",
+  },
+  
 ]
 
+var obj = [
+  {
+    key:1,
+    value: 10,
+    str:'fdfgdfg'
+  },
+  {
+    key:2,
+    value: 10,
+    str:'dfgdfg'
+  },
+  {
+    key:3,
+    value: 10,
+    str:'fdgdf'
+  },
+  {
+    key:4,
+    value: 10,
+    str:'gdfg',
+  },
+  {
+    key:5,
+    value: 10,
+    str:"dgdfg",
+  },
+  {
+    key:6,
+    value: 10,
+    str:'gdfg',
+  },
+]
+
+let newsdata = [
+  {
+    key:1,
+    image:require("../../assets/news1.png"),
+    news:"Fusce enim in sed iaculis facilisi pellentesque.",
+    coin:"BTC",
+    time:"16h ago",
+    source:"News Source"
+  },
+  {
+    key:2,
+    image:require("../../assets/news2.png"),
+    news:"Fusce enim in sed iaculis facilisi pellentesque.",
+    coin:"BTC",
+    time:"16h ago",
+    source:"News Source"
+  },
+  {
+    key:3,
+    image:require("../../assets/news3.png"),
+    news:"Platea adipiscing nam tempor ullamcorper velit bibendum amet nibh scelerisque.",
+    coin:"BTC",
+    time:"16h ago",
+    source:"News Source"
+  },
+  {
+    key:4,
+    image:require("../../assets/news4.png"),
+    news:"Diam quis elementum viverra nulla gravida euismod.",
+    coin:"BTC",
+    time:"16h ago",
+    source:"News Source"
+  },
+]
 const Home = ({navigation}) => {
-  StatusBar.setHidden(true)
-  
+
   const [data,setData] = useState(obj)
-  const [historyTab,setHistoryTab] = useState(false)
-  const [assetsmodal, setAssetsModal] = useState(false);
-  const [sentmodal, setSentModal] = useState(false);
-  const [recievemodal, setRecievedModal] = useState(false);
-  const [modal4, setModal4] = useState(false);
- 
-  const renderPortfolioItem = (item) => {
+  const [newsTab,setNewsTab] = useState(false)
+  const [itemView,setItemView] = useState(false)
+
+  useFocusEffect(
+    React.useCallback(() => {
+        const onBackPress = () => {
+          if (itemView) {
+            setItemView(false)
+            return true;
+          } else {
+            return false;
+          }
+        };
+        BackHandler.addEventListener(
+            'hardwareBackPress',
+            onBackPress
+        );
+        return () => {
+            BackHandler.removeEventListener(
+            'hardwareBackPress',
+            onBackPress
+            );
+        };
+    }),
+  );
+
+  const renderTopMoversItem = (item) => {
     return (
-      <TouchableOpacity style={protfilioitemstyles.verticalListItem}>
-        <View style={protfilioitemstyles.verticalListIconBackground}>
-            <Image style={{height:18,width:18}} source={require('../../assets/btc.png')} />
-          </View>
-            
-          <View style={{flexDirection:'column',flex:1}}>
-              <Text style={{color:'#fff',fontSize:16, fontFamily:boldtext}}>
-                Binance Coin
+      <View style={styles.horizantalListItem}>
+        <CustomText 
+          text={"+20.25%"} 
+          locations={[0,1]} 
+          colors={["#70A2FF", "#F76E64"]} 
+          style={{fontSize:22,fontFamily:boldtext,fontWeight:"bold", textAlign:"center"}} 
+        />
+        <View style={{flexDirection:'row',margin:10,alignItems: 'center',justifyContent: 'center'}}>
+            <Image 
+              style={{...styles.verticalListIconBackground,width:25,height:25}} 
+              source={require('../../assets/usdt.png')} />
+            <View style={{flexDirection:'column'}}>
+              <Text style={{color:'#fff',fontSize:14,fontFamily:simpletext,}}>
+                  Dogecoin
+              </Text>
+              <Text style={{color:graycolor, fontSize:12, fontFamily:simpletext,}}>
+                USD 0.13
+              </Text>
+            </View>
+        </View>
+      </View>
+    )
+  }
+
+  const renderMarketItem = ({item}) => {
+    
+    return (
+      <TouchableOpacity 
+        onPress={() =>alert("Market Item Pressd")}
+        style={styles.verticalListItem}
+      >
+          <Image style={styles.verticalListIconBackground} source={item.image} />
+            <View style={{flexDirection:'column',flex:1}}>
+              <Text style={{color:'#fff',fontFamily:simpletext, fontSize:16}}>
+                {item.name}
               </Text>
               <View style={{flexDirection:'row',alignItems: 'center'}}>
-                <Text style={{color:'#fff',fontFamily:simpletext, fontSize:12,marginRight:15}}>
-                  BTC
+                <Text style={{color:'#fff',fontFamily:simpletext,fontSize:12,marginRight:20}}>
+                  {item.dollar}
                 </Text>
-                <Text style={{color:green,fontFamily:simpletext, fontSize:12,}}>
-                  +11.70%
+                <Text style={{color:item.percent>= 0?green:"red" ,fontFamily:simpletext,}}>
+                   {item.percent>=0?"+"+item.percent:""+item.percent}%
                 </Text>
               </View>
           </View>
-          <View style={{alignItems: 'flex-end'}}>
-              <Text style={{color:'#fff',fontFamily:boldtext, fontSize:16}}>
-                $65465.56
+          <View style={{flexDirection:'column',alignItems: 'flex-end'}}>
+              <Text style={{color:'#fff',fontFamily:simpletext, fontFamily:simpletext}}>
+                {item.title}
               </Text>
           </View>
       </TouchableOpacity>
     )
   }
 
-  const renderHistoryItem = (item) => {
+  const renderNewsItem = ({item}) => {
     return (
-        <TouchableOpacity style={historyitemstyles.verticalListItem}>
-        <View style={historyitemstyles.verticalListIconBackground}>
-            <Image style={{height:18,width:18}} source={require('../../assets/btc.png')} />
-          </View>
-            
-          <View style={{flexDirection:'column',flex:1}}>
-              <Text style={{color:'#fff',fontSize:14, fontFamily:boldtext}}>
-                Aftab Amin
+      <TouchableOpacity 
+        onPress={() => openNewsItem(item)}
+        style={styles.newsListItem}
+      >
+          <View style={{margin:20,flex:1}}>
+              <Text style={{fontSize:16,color:'#fff',fontFamily:simpletext,}}>
+                  {item.news}
               </Text>
-              <View style={{flexDirection:'row',alignItems: 'center'}}>
-                <Text style={{color:graycolor,fontSize:12,fontFamily:simpletext }}>
-                  $234.32
-                </Text>
+              <View style={{flexDirection:'row',alignItems: 'center',marginTop:10}}>
+                  <View style={{height:13,width:13,borderRadius:13,backgroundColor:"#F7931A"}} />
+                  <Text style={styles.text}>
+                      {item.coin}
+                  </Text>
+                  <Text style={styles.text}>
+                      {item.time}
+                  </Text>
+                  <Text style={styles.text}>
+                      {item.source}
+                  </Text>
               </View>
           </View>
-          <View style={{flexDirection:'column', alignItems: 'flex-end'}}>
-              <Text style={{color:'#fff',fontSize:14,fontFamily:boldtext,}}>
-                12.3 ETH
-              </Text>
+          <View style={{backgroundColor:'transparent',marginRight:20,}}>
+            <Image source={item.image} style={{height:60,width:60,backgroundColor:"transparent", resizeMode:"cover"}} />
           </View>
       </TouchableOpacity>
     )
+  }
+
+  const openNewsItem = (item) => {
+    setItemView(true)
   }
 
   const marketPress = () => {
-    setHistoryTab(false)
+    setNewsTab(false)
+    setItemView(false)
   }
+  
+const backBtn = () => {
 
-  const showModal = (val) => {
-    switch (val) {
-      case "assets":
-        setAssetsModal(true)
-        break;
-      case "sent":
-        setSentModal(true)
-        break;
-      case "received":
-        setRecievedModal(true)
-        break;
-      case "buy":
-        setModal4(true)
-        break;
-      default:
-        return;
-    }
-  }
-    
+}
   return (
-    <Container style={styles.container}>
-      <StatusBar hidden />
-        <View style={styles.header}>
-            <TouchableOpacity style={styles.profile}
-            
-            >
-              <Image style={styles.profileimage} source={{uri:"https://i.pinimg.com/564x/de/fe/c1/defec1130775ba6b3db467359cc7599e.jpg"}} />
-            </TouchableOpacity>  
-            
-            <TouchableOpacity 
-              onPress={() => showModal("assets")}
-              style={{flexDirection:'row', alignSelf:'center'}
-            }>
-                <Text style={{color:'#fff', fontFamily:simpletext,marginRight:10, fontSize:14}}>
-                    My Assets
-                </Text>
-                <Feather name="chevron-down" color="#fff" size={22} />
-            </TouchableOpacity>
-        </View>
-       
-        <View style={styles.mainView}>
-            <View style={{flex:1}}>
-               <CustomText 
-                text="12.4345 ETH" 
-                locations={[0,0.1,0.6,.8,1]}
-                colors={["#A9CDFF", "#72F6D1","#A0ED8D","#FED365","#FAA49E"]} 
-                style={{color:"#fff", fontFamily:simpletext, fontSize:30,}} />
-                <View style={{flexDirection:'row',alignItems: 'center',marginTop:1}}>
-                    <Text style={{color:'#fff', fontFamily:simpletext}}>
-                        234.45345$
-                    </Text>
-                    <Text style={{color:green ,fontFamily:simpletext,marginHorizontal:10}}>
-                        23.43%
-                    </Text>
-                </View>
+      <View style={styles.container}>
+        <HeaderBackBtnWithLogo backBtn={backBtn} />
+          <Text style={{color:'#fff',fontSize:22,margin:20,fontFamily:boldtext}}>
+            Watchlist
+          </Text>
+          <View style={styles.mainView}>
+              <Image style={styles.iconBackground} source={require('../../assets/btc.png')} /> 
+              <View style={{flexDirection:'column',flex:1}}>
+                  <Text style={{color:'#fff',fontFamily:simpletext,fontSize:16}}>
+                      Bitcoin
+                  </Text>
+                  <Text style={{color:'#fff',fontFamily:simpletext,fontSize:12}}>
+                      BTC
+                  </Text>
             </View>
-               <CURRECO />
-        </View>
-
-        <View style={styles.horizantalListView}>
-            <TouchableOpacity style={styles.button}
-              onPress={() => showModal("sent")}
-            >
-              <SENT />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.button}
-              onPress={() => showModal("received")}
-            >
-                <RECIEVED />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.button}
-              onPress={() => showModal("buy")}
-            >
-                <BUY />
-            </TouchableOpacity>
-        </View>
-
-        <View style={styles.tabView}>
-            <TouchableOpacity
-                onPress={() => marketPress()}
-                style={{borderBottomWidth:!historyTab?2:0,margin:10,paddingHorizontal:15,
-                borderBottomColor:!historyTab?"#fff":"rgba(0,0,0,0)",}}>
-                <Text style={{color:!historyTab?"#fff":graycolor,fontFamily:simpletext, fontSize:16}}>
-                    Portfolio
+            <View style={{flexDirection:'column',alignItems: 'flex-end'}}>
+                <Text style={{color:'#fff', fontFamily:simpletext}}>
+                  USD $65465.56
                 </Text>
-            </TouchableOpacity>
-            <TouchableOpacity 
-                onPress={() => setHistoryTab(true)}
-                style={{borderBottomWidth:historyTab?2:0,margin:10,paddingHorizontal:15,
-                borderBottomColor:historyTab?"#fff":"rgba(0,0,0,0)",}}>
-                <Text style={{color:historyTab?"#fff":graycolor,fontFamily:simpletext, fontSize:16}}>
-                    History
+                <Text style={{color:green,}}>
+                  +11.70%
                 </Text>
-            </TouchableOpacity>
-        </View>
-
-        <View style={{flex:1,marginHorizontal:20}}>
-          {!historyTab ? (
+            </View>
+          </View>
+          <Text style={{color:'#fff',margin:20,fontSize:20,fontFamily:boldtext}}>
+            Top Movers
+          </Text>
+          <View style={styles.horizantalListView}>
             <FlatList 
-                data={data}
-                renderItem={renderPortfolioItem}
-                keyExtractor={(item,index) => index.toString()}
+              data={data}
+              horizontal={true}
+              renderItem={renderTopMoversItem}
+              keyExtractor={(item,index) => index.toString()}
             />
-          ):
-            <View>
-                <Text style={{color:'#fff',fontSize:14,fontFamily:simpletext, marginBottom:10}}>
-                    Transactions ({data.length})
-                </Text>
+          </View>
+          <View style={styles.tabView}>
+            <TouchableOpacity
+              onPress={() => marketPress()}
+              style={{borderBottomWidth:!newsTab?2:0,margin:10,paddingHorizontal:20,
+                borderBottomColor:!newsTab?"#fff":"#000",}}>
+              <Text style={{color:!newsTab?"#fff":graycolor,fontFamily:simpletext ,fontSize:16}}>
+                Market
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity 
+              onPress={() => setNewsTab(true)}
+              style={{borderBottomWidth:newsTab?2:0,margin:10,paddingHorizontal:20,
+                borderBottomColor:newsTab?"#fff":graycolor,}}>
+              <Text style={{color:newsTab?"#fff":graycolor,fontFamily:simpletext ,fontSize:16}}>
+                News
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <View style={{flex:1,width:'100%',borderTopWidth:newsTab && !itemView ? 1 : 0,borderTopColor:'#fff'}}>
+            {!newsTab ? (
+              <FlatList 
+                data={marketdata}
+                renderItem={renderMarketItem}
+                keyExtractor={(item,index) => index.toString()}
+              />
+            ):
+              <>
+              {!itemView ? (
+                <View>
                 <FlatList 
-                    data={data}
-                    renderItem={renderHistoryItem}
-                    keyExtractor={(item,index) => index.toString()}
+                  data={newsdata}
+                  renderItem={renderNewsItem}
+                  keyExtractor={(item,index) => index.toString()}
                 />
-            </View>
-          }
-        </View>
-        
-        <AssetsModal visible={assetsmodal} setVisible={setAssetsModal} />
-        <SentModal visible={sentmodal} setVisible={setSentModal} />
-        <RecievedModal visible={recievemodal} setVisible={setRecievedModal} />
-    </Container>
+                 <TouchableOpacity 
+                    style={styles.viewmore}
+                    
+                  >
+                    <Text style={{fontSize:16,fontFamily:boldtext,color:graycolor}}>
+                      View more
+                    </Text>
+                    <MaterialIcons name="chevron-right" size={30} color="#fff" style={{color:graycolor}}/>
+                  </TouchableOpacity>
+                </View>
+              ):
+                <ScrollView>
+                    <ImageBackground //remove backGroundColor and change image source
+                      source={require('../../assets/news1.png')} 
+                      style={{marginHorizontal:20,marginTop:10,height:140,borderRadius:10, overflow:"hidden", resizeMode:'cover',backgroundColor:'#fff'}}
+                    ></ImageBackground>
+                  <View style={{marginBottom:20,marginHorizontal:35,paddingVertical:30,borderBottomWidth:1,borderBottomColor:'#fff'}}>
+                    <Text style={{color:'#fff',fontSize:14,fontFamily:simpletext, textAlign:'justify'}}>
+                    Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
+                    </Text>
+                    <View style={{flexDirection:'row',alignItems: 'center',marginTop:10}}>
+                      <View style={{height:13,width:13,borderRadius:8,backgroundColor:"#F7931A"}}>
+                      </View>
+                      <Text style={{marginLeft:10,fontSize:12,fontFamily:simpletext, color:'#fff'}}>
+                        BTC
+                      </Text>
+                      <Text style={{marginLeft:20,fontSize:12,fontFamily:simpletext,color:'#fff'}}>
+                        16h ago
+                      </Text>
+                      <Text style={{marginLeft:20,fontSize:12,fontFamily:simpletext,color:'#fff'}}>
+                        News Source
+                      </Text>
+                    </View>
+                  </View>
+
+                  <TouchableOpacity style={styles.viewmore} onPress={() => setItemView(false)}>
+                      <Text style={{fontSize:16,fontFamily:boldtext,color:graycolor}}>
+                        All News
+                      </Text>
+                      <MaterialIcons name="chevron-right" size={30} color="#fff" style={{color:graycolor}}/>
+                  </TouchableOpacity>
+              </ScrollView>
+              }
+            </>
+            }
+          
+          </View>
+      </View>
   );
 }; 
 export default Home;
@@ -249,53 +381,53 @@ const styles = StyleSheet.create({
       flex:1,
       backgroundColor:"#17171A"
     },
-    header: {
-        marginHorizontal:20,
-        marginVertical:10,
-        width:width/1.8,
-        flexDirection:'row',
-        alignItems: 'center',
-        justifyContent:"space-between"
-    },
-    profile: {
-      height:35,
-      width:35,
-      alignSelf:"flex-start",
-      alignItems: 'center',
-      overflow:"hidden",
-      justifyContent:'center',
-      backgroundColor:'#F7931A',
-      borderRadius:25,
-      marginRight:20
-    },
     mainView: {
       alignItems: "center",
       flexDirection:'row',
-      justifyContent:'space-evenly',
+      justifyContent:'flex-start',
       marginHorizontal:20,
-      marginBottom:20,
-    },   
-    profileimage:{
-      height:35,
-      width:35,
+    },
+    iconBackground: {
+      height:45,
+      width:45,
+      alignItems: 'center',
+      justifyContent:'center',
+      backgroundColor:'transparent',
+      borderRadius:25,
+      marginRight:20
+    },
+    horizantalListItem: {
+      backgroundColor:'#2A2D3C',
+      alignItems: 'center',
+      justifyContent:"space-between",
+      marginLeft:20,
+      paddingTop:12,
+      paddingLeft:6,
+      paddingRight:12,
+      borderRadius:10,
+    },
+    verticalListItem: {
+      flexDirection:'row',
+      // backgroundColor:'#171921',
+      marginHorizontal:10,
+      marginBottom:8,
+      padding:12,
+      borderRadius:10,
     },
     tabView: {
       flexDirection:'row',
       alignItems: 'center',
       margin:15,
     },
-    horizantalListView: {
-      flexDirection:'row',
-      alignItems:"flex-start",
-      justifyContent:"flex-start",
-      marginHorizontal:15,
-      marginBottom:20,
-    },
-    button: {
-        marginHorizontal:10,
-        borderRadius:10,
-        flexDirection:'row',
-        backgroundColor:'#2A2D3C',
+    verticalListIconBackground: {
+      alignSelf:'center',
+      height:35,
+      width:35,
+      alignItems: 'center',
+      justifyContent:'center',
+    
+      borderRadius:18,
+      marginRight:20
     },
     newsListItem: {
       flex:1,
@@ -305,44 +437,18 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'space-between',
     },
-})
-
-const protfilioitemstyles = StyleSheet.create({
-  verticalListItem: {
-    flexDirection:'row',
-    marginHorizontal:10,
-    marginBottom:8,
-    padding:12,
-    borderRadius:10,
-  }, 
-  verticalListIconBackground: {
-    alignSelf:'center',
-    height:35,
-    width:35,
-    alignItems: 'center',
-    justifyContent:'center',
-    backgroundColor:'#F7931A',
-    borderRadius:18,
-    marginRight:20
-  },
-})
-
-const historyitemstyles = StyleSheet.create({
-  verticalListItem: {
-    flexDirection:'row',
-    marginHorizontal:10,
-    marginBottom:8,
-    padding:12,
-    borderRadius:10,
-  }, 
-  verticalListIconBackground: {
-    alignSelf:'center',
-    height:35,
-    width:35,
-    alignItems: 'center',
-    justifyContent:'center',
-    backgroundColor:'#F7931A',
-    borderRadius:18,
-    marginRight:20
-  },
+    text:{
+      marginLeft:10,
+      fontSize:12,
+      fontFamily:simpletext,
+      color:'#fff'
+    },
+    viewmore:{
+      marginHorizontal:30,
+      marginBottom:20,
+      height:40,
+      flexDirection:'row',
+      alignItems: 'center',
+      justifyContent: 'space-between'
+    }
 })

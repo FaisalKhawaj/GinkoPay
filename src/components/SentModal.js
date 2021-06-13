@@ -1,52 +1,66 @@
 import React,{useState} from 'react';
-import { View,FlatList,   Dimensions,StyleSheet, Image, Text, TouchableOpacity, Touchable, StatusBar } from 'react-native';
+import { View,FlatList,   Dimensions,StyleSheet, Image, Text, TouchableOpacity,  } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import Icon from 'react-native-vector-icons/Ionicons';
 import Modal from 'react-native-modal';
 import { boldtext, simpletext } from '../constants/fonts';
 import { graycolor, green } from '../constants/colors';
-import CustomText from './Text';
+import TokenModal from './SendModalToken'
+import SentModalMessage from './SentModalMessage';
+
 const {width, height} = Dimensions.get("window");
 
 var obj = [
     {
       key:1,
-      value: 10,
-      str:'fdfgdfg'
+      name: "Beexay",
+      link:'0x3Dc6...DxE9',
+      image:require("../assets/token2.png")
     },
     {
-      key:2,
-      value: 10,
-      str:'dfgdfg'
+        key:2,
+        name: "Dasun Bussi",
+        link:'0x2Dc6...DcT9',
+        image:require("../assets/token3.png")
     },
     {
-      key:3,
-      value: 10,
-      str:'fdgdf'
+        key:3,
+        name: "Smart Gevan",
+        link:'0x3R2E...DxR9',
+        image:require("../assets/token1.png")
     },
 ]
 
 const SentModal = ({visible, setVisible}) => {
+const [tokenmodal, setTokenModal] = useState(false)
+const [sendmessagemodal, setSendMessageModal] = useState(false)    
+const [modaldata, setModalData] = useState({
+    key:1,
+    name: "Beexay",
+    link:'0x3Dc6...DxE9',
+    image:require("../assets/token2.png")
+  })
 
-    const renderItem = (item) => {
-     
+const openmodal = (item) => {
+    setSendMessageModal(true)
+    setModalData(item)
+}
+const renderItem = (item) => {
         return (
-            <View style={{width:width-60, alignSelf:"center", paddingVertical:45, alignItems:"center", flexDirection:"row",height:60, justifyContent:"space-between"}}>
-                    <View style={{flexDirection:"row"}}>
+            <TouchableOpacity style={styles.renderItemmain} onPress={() => openmodal(item.item)} >
+                <View style={{flexDirection:"row"}}>
                     <Image 
                         style={{width:40, height:40, resizeMode:"cover", borderRadius:60,}}
-                        source={{uri:"http://callerapp.net/finder/apis/v1/images/03119998999.jpg"}} />
+                        source={item.item.image} />
                     <View style={{marginLeft:20}}>
                         <Text style={{color:"#fff" , fontFamily:simpletext, fontSize:15}}>
-                            Binance Coin
+                            {item.item.name}
                         </Text>
                         <Text style={{color:graycolor, fontFamily:simpletext,fontSize:12}}>
-                            Binance Coin
+                            {item.item.link}
                         </Text>
                     </View>
-                    </View>
-                   
-                </View>
+                </View>     
+            </TouchableOpacity>
         )
     }
 
@@ -70,7 +84,7 @@ const SentModal = ({visible, setVisible}) => {
             <View style={styles.mainview}>
                 <Text style={styles.sentto}>Sent To</Text>
                 <Text style={styles.from}>From</Text>
-                <View style={{width:width-100, alignSelf:"center", alignItems:"center", flexDirection:"row",height:60, justifyContent:"space-between"}}>
+                <TouchableOpacity style={styles.fromselect} onPress={() => setTokenModal(true)}>
                     <View style={{flexDirection:"row"}}>
                     <Image 
                         style={{width:40, height:40, resizeMode:"cover", borderRadius:60,}}
@@ -87,23 +101,26 @@ const SentModal = ({visible, setVisible}) => {
                     <TouchableOpacity>
                             <MaterialIcons  name="keyboard-arrow-right" size={20} color="#fff"  />
                     </TouchableOpacity>
-                </View>
+                </TouchableOpacity>
+
                 <Text style={styles.from}>To</Text>
-                <View style={{height:80, width:width-40,paddingHorizontal:20, marginBottom:30, justifyContent:"space-between", flexDirection:"row", alignItems:"center", borderRadius:10, marginTop:10, alignSelf:"center", borderWidth:1, borderColor:graycolor}}>
+                <View style={{height:60, width:width-40,paddingHorizontal:20, marginBottom:30, justifyContent:"space-between", flexDirection:"row", alignItems:"center", borderRadius:10, marginTop:10, alignSelf:"center", borderWidth:1, borderColor:graycolor}}>
                         <Text style={{color:graycolor, fontFamily:boldtext,fontSize:15}}>
-                        Search, public address (0x), or ENS
+                            Search, public address (0x), or ENS
                         </Text>
                         <Image 
-                        style={{width:30, height:30, resizeMode:"cover", borderRadius:6,}}
+                        style={{width:20, height:20, resizeMode:"cover", borderRadius:26,}}
                         source={{uri:"http://callerapp.net/finder/apis/v1/images/03119998999.jpg"}} />
                 </View>
                 <Text style={styles.recent}>Recent</Text>
                 <FlatList 
                     data={obj}
-                    renderItem={renderItem}
+                    renderItem={(item) => renderItem(item)}
                     keyExtractor={(item,index) => index.toString()}
                 />
-            </View>        
+            </View>  
+            <TokenModal visible={tokenmodal} setVisible={setTokenModal} /> 
+            <SentModalMessage visible={sendmessagemodal} setVisible={setSendMessageModal} data={modaldata} />   
         </Modal>
     )
 }
@@ -121,10 +138,7 @@ const styles = StyleSheet.create({
         width:width,
         bottom:0,
         padding:20,
-       // alignSelf: 'center',
-       // alignItems: 'center',
         backgroundColor:'#17171A',
-     
         borderTopRightRadius:10, 
         borderTopLeftRadius:10
     },
@@ -145,19 +159,6 @@ const styles = StyleSheet.create({
         fontSize:16 ,
         fontFamily:boldtext
     },
-
-
-
-
-
-
-
-
-
-
-
-
-
     ethereumview:{
         flexDirection:'row',
         width:width,
@@ -199,5 +200,22 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginHorizontal:40,
         marginBottom:30
+    },
+    fromselect:{
+        width:width-100, 
+        alignSelf:"center", 
+        alignItems:"center", 
+        flexDirection:"row",
+        height:60, 
+        justifyContent:"space-between"
+    },
+    renderItemmain:{
+        width:width-60, 
+        alignSelf:"center", 
+        paddingVertical:45, 
+        alignItems:"center", 
+        flexDirection:"row",
+        height:60, 
+        justifyContent:"space-between"
     }
 })

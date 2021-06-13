@@ -11,7 +11,7 @@ const CustomText = (props) =>{
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 0 }}
         >
-            <Text style={{fontFamily:simpletext}}>{props.text}</Text>
+            <Text >{props.text}</Text>
         </LinearTextGradient>
     )
 }

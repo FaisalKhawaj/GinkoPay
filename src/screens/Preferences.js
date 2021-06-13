@@ -48,16 +48,21 @@ const Preferences = ({ navigation }) => {
 
                 <BackBtnWithMiddleText text="Preferences" backBtn={BackBtnHandler} navigation={navigation} />
                 <View style={{ marginTop: 40 }}>
-                    <PreferencesTitleDescriptionArrowBtn title="General"
+                    <PreferencesTitleDescriptionArrowBtn 
+                        title="General"
                         showModal={closeModalHandler}
                         description={"Currency conversion, primary currency\n,language and search engine"}
                     />
                 </View>
 
-                <PreferencesTitleDescriptionArrowBtn title="Security & Privacy"
+                <PreferencesTitleDescriptionArrowBtn 
+                    title="Security & Privacy"
+                    showModal={closeModalHandler}
                     description={"Privacy settings, private key and wallet\nseed phrase"}
                 />
-                <PreferencesTitleDescriptionArrowBtn title="Verification"
+                <PreferencesTitleDescriptionArrowBtn 
+                    title="Verification"
+                    showModal={closeModalHandler}
                     description={"In order to use the service of GinkoPay\nyou will need to verify your identy"}
                 />
 
