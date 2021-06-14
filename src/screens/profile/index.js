@@ -101,7 +101,7 @@ const Profile = ({ navigation }) => {
     console.log("Comp  " + showCompaignModal + " Banner  " + showBannerModal + " referal  " + ReferalModal)
     return (
         <Container style={{ backgroundColor: BackgroundColor }}>
-            <Content contentContainerStyle={{
+            <View style={{
                 backgroundColor: BackgroundColor
             }}>
                 <HeaderBackBtnWithLogo backBtn={BackBtnHandler} />
@@ -589,7 +589,7 @@ const Profile = ({ navigation }) => {
 
 
 
-            </Content>
+            </View>
         </Container>
     )
 }

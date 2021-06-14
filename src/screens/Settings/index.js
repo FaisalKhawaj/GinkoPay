@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
 import { Container,  Content,  Item,Thumbnail, Input, Label } from 'native-base'
 import { View, Text, Image, TouchableOpacity, Dimensions,Share, StyleSheet, TextInput } from 'react-native'
-import Icon from 'react-native-vector-icons/Ionicons'
 import LinearGradient from 'react-native-linear-gradient'
 import Modal from 'react-native-modal';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import ImagePicker from 'react-native-image-crop-picker';
 
 import { BackgroundColor, graycolor, LinearGradientColorOne, LinearGradientColorTwo } from '../../constants/colors';
-import styles from '../slidescreenone/styles';
+
 import SettingsWithImgTextIcon from '../../components/SettingsImgTextArrowBtn';
-import { BlurView, VibrancyView } from "@react-native-community/blur";
+import { BlurView } from "@react-native-community/blur";
 import BackBtnWithMiddleText from '../../components/BackBtnMiddleText';
 import CustomButton from '../../components/Button';
 import { mystyles } from '../../styles';
 import { simpletext } from '../../constants/fonts';
 const { width, height } = Dimensions.get('window');
+
 const Settings = ({ navigation }) => {
 
     const EditProfileHandler = () => {
@@ -65,8 +65,9 @@ const Settings = ({ navigation }) => {
     }
     
     const [showEditProfileModal, setShowEditProfileModal] = useState(false)
-    const [ProfileImg, setProfileImg] = useState('')
+    const [ProfileImg, setProfileImg] = useState(require("../../assets/profilePic.png"))
     const [name, setName] = useState("")
+    
     const openPicker = () => {
         ImagePicker.openPicker({
             width: 300,
@@ -136,8 +137,6 @@ const Settings = ({ navigation }) => {
                     coverScreen={true}
                     animationOut="slideOutDown"
                     visible={showEditProfileModal}
-                // hasBackdrop={true}
-                // onBackdropPress={() => setShowEditProfileModal(false)}
                 >
                     <View style={[mystyles.referCodeModalMainView, { height: height / 1.7, width: width }]}>
                         <View style={mystyles.modalUpperSmallLine} />
@@ -189,7 +188,7 @@ const Settings = ({ navigation }) => {
                         blurAmount={10}
                         reducedTransparencyFallbackColor="#222531"
                     />
-                    : null}
+                :null}
 
 
             </Content>

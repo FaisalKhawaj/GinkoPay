@@ -123,7 +123,7 @@ const CompaignMainPage = ({ navigation }) => {
     }
     return (
         <Container style={{ backgroundColor: BackgroundColor }}>
-            <Content contentContainerStyle={{
+            <View style={{
                 // flex: 1,
                 backgroundColor: BackgroundColor
             }}>
@@ -211,7 +211,7 @@ const CompaignMainPage = ({ navigation }) => {
                 }
 
 
-            </Content>
+            </View>
         </Container >
     )
 }
