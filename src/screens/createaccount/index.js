@@ -1,7 +1,7 @@
 
 import React, {useState} from 'react';
 import { View,  StatusBar,Text,Dimensions,StyleSheet, TouchableOpacity } from 'react-native';
-import { Container,  Content, Form, Item, Input, Label } from 'native-base'
+import { Container,  Content,  Item, Input, Label } from 'native-base'
 import {Checkbox  } from 'react-native-paper';
 import LinearGradient from 'react-native-linear-gradient'
 import { bluetext,graycolor, LinearGradientColorOne,LinearGradientColorTwo, BackgroundColor } from '../../constants/colors';

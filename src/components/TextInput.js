@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { TextInput } from 'react-native-paper';
-
 import {StyleSheet,Text,Dimensions, View, Touchable, TouchableOpacity} from 'react-native'
 import { BackgroundColor, graycolor,  } from '../constants/colors';
 import {fontmedium, simpletext} from '../constants/fonts'
@@ -39,7 +38,6 @@ const MyComponent = ({label, value , setValue , error ,placeholder, secureTextEn
         </TouchableOpacity>
         :null}
         <Text style={{color:"red",marginHorizontal:20,fontFamily:simpletext, fontSize:12}} >{error}</Text>
-
     </View>
   );
 };
@@ -47,7 +45,6 @@ const MyComponent = ({label, value , setValue , error ,placeholder, secureTextEn
 export default MyComponent;
 
 const styles = StyleSheet.create({
-
   textinput:{
     backgroundColor:BackgroundColor, 
     fontFamily:fontmedium,
@@ -67,4 +64,3 @@ const styles = StyleSheet.create({
     height:70
   }
 })  
-

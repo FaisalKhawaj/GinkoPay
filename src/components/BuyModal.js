@@ -1,11 +1,10 @@
 import React,{useState} from 'react';
 import { View,FlatList,   Dimensions,StyleSheet, Image, Text, TouchableOpacity, Touchable, StatusBar } from 'react-native';
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
-import Icon from 'react-native-vector-icons/Ionicons';
+import Entypo from 'react-native-vector-icons/Entypo';
 import Modal from 'react-native-modal';
-import { boldtext, simpletext } from '../constants/fonts';
-import { graycolor, green } from '../constants/colors';
-import CustomText from './Text';
+import { boldtext, fontmedium, simpletext } from '../constants/fonts';
+import { bluetext, graycolor, green } from '../constants/colors';
+import APPLEPAY from '../assets/applepay.svg'
 const {width, height} = Dimensions.get("window");
 
 var obj = [
@@ -27,19 +26,6 @@ var obj = [
 ]
 
 const AssetsModal = ({visible, setVisible}) => {
-
-    const renderItem = (item) => {
-     
-        return (
-            <View style={styles.flatlistitemmain}>
-                <View style={{marginHorizontal:10,flexDirection:'row',alignItems: 'center'}}>
-                    <View style={{height:12,width:12, marginRight:15,borderRadius:7,backgroundColor:"#FEBF32"}}></View>
-                    <Text style={{color:'#fff',fontSize:14,fontFamily:simpletext}}>Ethereum</Text>
-                </View>
-            </View>
-        )
-    }
-
     return (
         <Modal 
             isVisible={visible}
@@ -57,28 +43,51 @@ const AssetsModal = ({visible, setVisible}) => {
             backdropOpacity = {.85}
         >
             <View style={styles.mainview}>
-                <View style={{backgroundColor:"#ffffff",bottom:10,height:4,width:50,borderRadius:5}} />
-                <Text style={styles.network}> Network</Text>
-                <View style={styles.ethereumview}>
-                    <View style={styles.ethereumviewinner}>
-                        <View style={styles.circle} />
-                        <Text style={styles.text}>Ethereum</Text>
-                    </View>
-                    <Icon name="ios-checkmark-circle-outline" color={green} size={20} style={{alignSelf:'flex-end',marginRight:20}} />
+                <View style={styles.header}>
+                    <Text style={{color:"#ffffff", fontFamily:fontmedium,fontSize:16 }}>purchase Method</Text>
+                    <TouchableOpacity onPress={() => setVisible(false)}>
+                        <Entypo name="cross" color={"#ffffff"} size={22}  /> 
+                    </TouchableOpacity>
                 </View>
-                <Text style={styles.otherassets}>Other Assets</Text>
-                <FlatList 
-                    data={obj}
-                    renderItem={renderItem}
-                    keyExtractor={(item,index) => index.toString()}
-                />
-                <TouchableOpacity onPress={() => setVisible()}>
-                    <CustomText 
-                        text={"Close"} 
-                        locations={[0,1]} colors={["#70A2FF", "#F76E64",]} 
-                        style={{fontSize:18,fontFamily:simpletext, marginBottom:20, textAlign:"center"}}
-                    />
-                </TouchableOpacity>
+
+                <Text style={styles.BelowHeaderText}>How do you want to make your purchase?</Text>
+                <View>
+                    <View style={{flexDirection:"row" , height:45,  alignItems:"center"}}>
+                        <Text  style={{color:"#ffffff",fontFamily:boldtext,fontSize:16, marginRight:15,}}>Apple Pay</Text> 
+                        <Text  style={{color:graycolor,fontFamily:simpletext,fontSize:16, marginRight:15,}}>Via</Text>
+                        <APPLEPAY />
+                    </View>
+
+                    <View style={{width:width*.9, justifyContent:"space-between", flexDirection:"row", paddingVertical:30}}>
+                        <Text  style={{color:graycolor, width:width*.4, fontFamily:simpletext}}>1-2 minutes Max $450 weekly Requires debit card</Text>
+                        <View style={{flexDirection:"column", justifyContent:"flex-end"}}>
+                            <View style={{flexDirection:"row", justifyContent:"flex-end"}}>
+                                <Entypo name="warning" color={bluetext} size={18} style={{marginRight:20}} />
+                                <Text  style={{color:graycolor,fontFamily:simpletext}}>US Only</Text>
+                            </View>
+                            <Text  style={{color:graycolor,fontFamily:simpletext}}>Some States are exluded</Text>
+                        </View>
+                    </View>
+                </View>
+
+                <View  style={{width:width*.9, justifyContent:"space-between",height:1, backgroundColor:graycolor, marginHorizontal:30}}/>
+                
+                <View style={{width:width*.9, justifyContent:"space-between", flexDirection:"row", paddingVertical:50}}>
+                    <View style={{flexDirection:"column", justifyContent:"flex-end"}}>
+                        <Text  style={{color:'#ffffff', width:width*.4,fontSize:16, fontFamily:boldtext}}>Bank Transfer or Debit Card</Text>
+                        <Text  style={{color:graycolor, width:width*.4,marginVertical:10, fontFamily:fontmedium}}>Requires registration</Text>
+                        <Text  style={{color:graycolor, width:width*.4, fontFamily:simpletext}}>Option and fees vary based on location</Text>
+                    </View>
+                    <View style={{flexDirection:"column", justifyContent:"flex-end"}}>
+                        <View style={{flexDirection:"row", justifyContent:"flex-end"}}>
+                            <Entypo name="warning" color={bluetext} size={18} style={{marginRight:20}} />
+                            <Text  style={{color:graycolor,fontFamily:simpletext}}>59 countries</Text>
+                        </View>
+                        
+                    </View>
+                </View>
+                <View  style={{width:width*.9, justifyContent:"space-between",height:1, backgroundColor:graycolor, marginHorizontal:30}}/>
+               
             </View>        
         </Modal>
     )
@@ -91,7 +100,7 @@ const styles = StyleSheet.create({
         margin: 0
     },
     mainview:{
-        height:height/1.7,
+        height:height/1.1,
         flex:1,
         width:width,
         bottom:0,
@@ -102,6 +111,20 @@ const styles = StyleSheet.create({
         position:'absolute',
         borderTopRightRadius:10, 
         borderTopLeftRadius:10
+    },
+    header:{
+        flexDirection:"row",
+        marginTop:10, 
+        width:width*.7,
+        alignSelf:"flex-end", 
+        justifyContent:"space-around"
+    },
+    BelowHeaderText:{
+        color:"#ffffff",
+        marginVertical:30,
+        paddingHorizontal:50, 
+        textAlign:"center", 
+        fontFamily:simpletext
     },
     network:{
         color:"#fff",

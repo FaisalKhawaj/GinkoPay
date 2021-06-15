@@ -1,30 +1,41 @@
 import React, { useState } from 'react';
 import { Container, Content, Thumbnail } from 'native-base'
-import { View, Text, Image, Dimensions, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, Text, ScrollView, Dimensions, TouchableOpacity, StyleSheet } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { RadioButton } from 'react-native-paper';
 import { BackgroundColor } from '../constants/colors';
 import Modal from 'react-native-modal';
 import DropDownPicker from 'react-native-dropdown-picker';
-import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import { mystyles } from '../styles';
 import BackBtnWithMiddleText from '../components/BackBtnMiddleText';
 import PreferencesTitleDescriptionArrowBtn from '../components/PreferencesTitleDescriptionArrowBtn';
 import HeaderBackTextCloseBtn from '../components/HeaderBackTextClose';
 import CustomButton from '../components/Button';
+import { boldtext, simpletext } from '../constants/fonts';
+import KycModal from '../components/kYCModal'
 const { width, height } = Dimensions.get('window')
 const Preferences = ({ navigation }) => {
+
     const [showGeneralModal, setShowGeneralModal] = useState(false)
     const [checkedCurrency, setCheckedCurrency] = React.useState('Native');
     const [checkedUserSearch, setCheckedUserSearch] = useState('Yes')
+    const [showPrivacyModal, setShowPrivacyModal] = useState(false)
+    const [showverificationModal , setShowVerificatonModal] =  useState(false)
     const BackBtnHandler = () => {
         navigation.goBack()
     }
+
+
     const closeModalHandler = () => {
         setShowGeneralModal(!showGeneralModal)
     }
+
+
     const UpdateGeneralHandler = () => {
-        alert('Update')
+        setShowPrivacyModal(!showPrivacyModal)
+    }
+
+    const functionshowverificationmodal = () =>{
+        setShowVerificatonModal(!showverificationModal)
     }
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState(null);
@@ -38,26 +49,28 @@ const Preferences = ({ navigation }) => {
         { label: 'English', value: 'English' },
         { label: 'Italic', value: 'Italic' },
     ]);
-    // const GeneralModalHandler=()=>
-    // {
-    //     showGeneralModal(!showGeneralModal)
-    // }
+
     return (
-        <Container style={{ backgroundColor: BackgroundColor }}>
+        <Container style={{ backgroundColor: BackgroundColor,flex:1 }}>
             <Content contentContainerStyle={{ backgroundColor: BackgroundColor }} >
 
                 <BackBtnWithMiddleText text="Preferences" backBtn={BackBtnHandler} navigation={navigation} />
                 <View style={{ marginTop: 40 }}>
-                    <PreferencesTitleDescriptionArrowBtn title="General"
+                    <PreferencesTitleDescriptionArrowBtn 
+                        title="General"
                         showModal={closeModalHandler}
                         description={"Currency conversion, primary currency\n,language and search engine"}
                     />
                 </View>
 
-                <PreferencesTitleDescriptionArrowBtn title="Security & Privacy"
+                <PreferencesTitleDescriptionArrowBtn 
+                    title="Security & Privacy"
+                    showModal={UpdateGeneralHandler}
                     description={"Privacy settings, private key and wallet\nseed phrase"}
                 />
-                <PreferencesTitleDescriptionArrowBtn title="Verification"
+                <PreferencesTitleDescriptionArrowBtn 
+                    title="Verification"
+                    showModal={functionshowverificationmodal}
                     description={"In order to use the service of GinkoPay\nyou will need to verify your identy"}
                 />
 
@@ -68,8 +81,6 @@ const Preferences = ({ navigation }) => {
                     coverScreen={true}
                     animationOut="slideOutDown"
                     visible={showGeneralModal}
-                // hasBackdrop={true}
-                // onBackdropPress={() => setShowEditProfileModal(false)}
                 >
                     <View style={{ height: height / 1.1, backgroundColor: '#17171A' }}>
                         <HeaderBackTextCloseBtn text="General" closeModal={closeModalHandler} />
@@ -146,7 +157,7 @@ const Preferences = ({ navigation }) => {
                         <View style={styles.CurrencyPRivacyCurrentLanUserSearchView}>
                             <Text style={styles.headingText}>Current Language</Text>
                             <Text style={styles.descriptionText}>
-                                Translate the application to a different{'\n'}supported language
+                                Translate the application to a different{'\n'}Supported language
                              </Text>
                         </View>
 
@@ -181,10 +192,6 @@ const Preferences = ({ navigation }) => {
                             setOpen={setOpenLanguage}
                         />
 
-
-
-
-
                         <View style={styles.CurrencyPRivacyCurrentLanUserSearchView}>
                             <Text style={styles.headingText}>User can search my profile </Text>
                             <Text style={styles.descriptionText}>
@@ -218,27 +225,86 @@ const Preferences = ({ navigation }) => {
                             <CustomButton text={"Update"} onPress={UpdateGeneralHandler}
                             />
                         </View>
-
                     </View>
                 </Modal>
 
-
-
+                
             </Content>
-        </Container >
+            <Modal
+                 animationType="slide"
+                 transparent={true}
+                 style={{ height: height / 1, alignSelf: 'center', width: '100%' }}
+                 coverScreen={true}
+                 animationOut="slideOutDown"
+                 scrollHorizontal={true}
+                 visible={showPrivacyModal}
+                >
+                <ScrollView >
+                    <View style={{ height: height, backgroundColor: '#17171A' }}>
+                        <HeaderBackTextCloseBtn text="Security & Privacy" closeModal={UpdateGeneralHandler} />
+                        
+                        <View style={styles.CurrencyPRivacyCurrentLanUserSearchView}>
+                            <Text style={styles.headingText}>Privacy</Text>
+                        </View>
+
+
+                        <View style={styles.CurrencyPRivacyCurrentLanUserSearchView}>
+                            <Text style={styles.headingText}>Clear Privacy Data</Text>
+                            <Text style={styles.descriptionText}>
+                                    Clear Priacy data so all websites must{'\n'}request access to view account information {'\n'}again
+                            </Text>
+                        </View>
+
+                        <TouchableOpacity style={{
+                            height:45,
+                            marginVertical:10,
+                            marginHorizontal:20,width:width-40, borderRadius:5,backgroundColor:"#222531",justifyContent:"center", alignItems:"center" }}>
+                            <Text style={{color:"#4C516B"}}>Clear Privacy Data</Text>
+                        </TouchableOpacity>
+
+                        <View style={styles.CurrencyPRivacyCurrentLanUserSearchView}>
+                            <Text style={styles.headingText}>Privacy Mode</Text>
+                            <Text style={styles.descriptionText}>
+                                Website must request access to view your account information
+                            </Text>
+                        </View>
+
+                        <View style={styles.CurrencyPRivacyCurrentLanUserSearchView}>
+                            <Text style={styles.headingText}>Participate in MetaMetrics</Text>
+                            <Text style={styles.descriptionText}>
+                                Participate in MetaMetrics to help us make GinkoPay better
+                            </Text>
+                        </View>
+
+                        <View style={styles.CurrencyPRivacyCurrentLanUserSearchView}>
+                            <Text style={styles.headingText}>Get Incoming Transactions</Text>
+                            <Text style={styles.descriptionText}>
+                            Third party APIs (Etherscan are used to show {"\n"} your incoming transactions in the history. {"\n"}
+                            Turn off if you don’t want us to pull data{"\n"} from those service
+                            </Text>
+                        </View>
+                        
+                        <View style={{ position: 'absolute', alignSelf: 'center', bottom: 10 }}>
+                            <CustomButton text={"Update"} onPress={UpdateGeneralHandler}/>
+                        </View>
+                    </View>
+                </ScrollView>
+            </Modal>
+            <KycModal visible={showverificationModal} setVisible={setShowVerificatonModal} />
+        </Container>
     )
 }
 export default Preferences
 
 const styles = StyleSheet.create({
     CurrencyPRivacyCurrentLanUserSearchView: {
-        marginVertical: 10, marginLeft: 20
+        marginVertical: 10, marginLeft: 20,marginRight:20
     },
     headingText: {
-        fontSize: 16, fontFamily: 'Poppins-Bold', color: '#FFFF'
+        fontSize: 16, fontFamily: boldtext, color: '#FFFF',marginVertical: 5,
     },
     descriptionText: {
-        fontFamily: 'Poppin-Regular', fontSize: 14, color: '#ABAFC4'
+        fontFamily:simpletext,  fontSize: 14, color: '#ABAFC4',marginVertical: 5,
     }
 
 })
