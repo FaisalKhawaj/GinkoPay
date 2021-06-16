@@ -11,30 +11,30 @@ const {width, height} = Dimensions.get("window");
 var obj = [
     {
       key:1,
-      value: 10,
-      str:'fdfgdfg'
+      name:"Binance Coin",
+      color:'#EA3943'
     },
     {
       key:2,
-      value: 10,
-      str:'dfgdfg'
+      name:"USD Coin",
+      color:'#45F0D1'
     },
     {
       key:3,
-      value: 10,
-      str:'fdgdf'
+      name:"Cardano",
+      color:'#5F97FF'
     },
 ]
 
 const AssetsModal = ({visible, setVisible}) => {
 
-    const renderItem = (item) => {
+    const renderItem = ({item}) => {
      
         return (
             <View style={styles.flatlistitemmain}>
                 <View style={{marginHorizontal:10,flexDirection:'row',alignItems: 'center'}}>
-                    <View style={{height:12,width:12, marginRight:15,borderRadius:7,backgroundColor:"#FEBF32"}}></View>
-                    <Text style={{color:'#fff',fontSize:14,fontFamily:simpletext}}>Ethereum</Text>
+                    <View style={{height:12,width:12, marginRight:15,borderRadius:7,backgroundColor:item.color}}></View>
+                    <Text style={{color:'#fff',fontSize:14,fontFamily:simpletext}}>{item.name}</Text>
                 </View>
             </View>
         )

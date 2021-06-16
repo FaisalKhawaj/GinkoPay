@@ -3,13 +3,13 @@ import React, {useState} from 'react';
 import { View,  StatusBar,Text,Dimensions,StyleSheet, TouchableOpacity } from 'react-native';
 import { Container,  Content,  Item, Input, Label } from 'native-base'
 import {Checkbox  } from 'react-native-paper';
-import LinearGradient from 'react-native-linear-gradient'
 import { bluetext,graycolor, LinearGradientColorOne,LinearGradientColorTwo, BackgroundColor } from '../../constants/colors';
 import CustomButton from '../../components/Button'
 import Header from '../../components/CreateAccountHeader'
 import Modal from '../../components/TermsAndConditionModal'
 import Feather from 'react-native-vector-icons/Feather'
 import { boldtext, fontmedium, simpletext } from '../../constants/fonts';
+import ToggleButton from '../../components/ToggleButton' 
 const {width, height} = Dimensions.get("window");
 
  const CreateAccountScreen = ({navigation}) => {
@@ -32,7 +32,8 @@ const {width, height} = Dimensions.get("window");
 
   const [checked, setChecked] = React.useState(false);
   const [isModalVisible, setModalVisible] = useState(false);
-
+  
+  const [check, uncheck] = useState(false);
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
@@ -48,7 +49,7 @@ const {width, height} = Dimensions.get("window");
    return (
      <Container style={styles.container}>
         <Header num={1} />
-        <Content style={{flexGrow:1}} contentContainerStyle={{paddingBottom:20}} >
+        <Content style={{flexGrow:1}} contentContainerStyle={{paddingBottom:20,backgroundColor:BackgroundColor}} >
           <Text style={styles.createaccount}> Create Your Acccount</Text>
           
           <View style={styles.textinputmaincontainer}>
@@ -132,13 +133,7 @@ const {width, height} = Dimensions.get("window");
 
           <View style={styles.faceidsignin}>
               <Text style={{color:"#fff", fontFamily:fontmedium, fontSize:18}}>Sign in with Face ID?</Text>
-              <LinearGradient 
-                start={{x: 0, y: 0}} end={{x: 1, y: 0}}
-                colors={[LinearGradientColorOne,LinearGradientColorTwo]} 
-                style={styles.LinearGradient}
-              >
-              <View style={{height:20, width:20, borderRadius:4, backgroundColor:"#fff"}}></View>
-              </LinearGradient>
+              <ToggleButton check={check} unchecked={uncheck} />
            </View>
           
           <View style={{flexDirection:"row", marginVertical:10,width:width-60,alignSelf:"center" }}>
@@ -154,8 +149,10 @@ const {width, height} = Dimensions.get("window");
                 <Text style={{color:graycolor, fontFamily:simpletext, marginHorizontal:15,}}>By proceeding, you agree to these  
                 <Text style={{color:bluetext,fontFamily:simpletext, }} onPress={() => toggleModal()} > Term and Conditions.</Text></Text>
           </View>
-          <CustomButton text={"Create Password"} onPress ={() => gotonextScreen()} />
         </Content>
+        <View style={{position:"absolute",alignSelf:"center",backgroundColor:BackgroundColor, bottom:20,}}>
+              <CustomButton text={"Create Password"} onPress ={() => gotonextScreen()} />
+          </View>
         <Modal isModalVisible={isModalVisible} setModalVisible={setModalVisible} toggleModal={toggleModal} />
      </Container>
    );

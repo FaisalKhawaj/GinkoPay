@@ -18,7 +18,7 @@ import { boldtext, fontmedium } from '../../constants/fonts';
         <Header num={3} />
          <Content style={{flexGrow:1}} 
          contentContainerStyle={styles.contentContainerStyle}  >
-          <Image source={require("../../assets/slider3.png")} style={{width:200, height:200, resizeMode:"center"}} />
+          <Image source={require("../../assets/kycneed.png")} style={{width:300, height:300, resizeMode:"cover"}} />
           <Text style={styles.heading}>KYC Needed</Text>
           <Text style={styles.paragraph}>Duo the regulations we will need to ask you for your documents, so we can allow you to use our features. Your document will be only used for verification and will NOT be sent to 3rd parties. Here is the link:</Text>
           <TouchableOpacity>

@@ -1,11 +1,14 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import { View,SafeAreaView, ScrollView,  StatusBar, Image } from 'react-native';
 import CustomText from '../../components/Text'
 import CustomButton from '../../components/Button'
 import ThreeDots from '../../components/ThreeDots'
 import styles,{width, height} from './styles'
-
+import SplashScreen from 'react-native-splash-screen'
  const SliderScreenOne = ({navigation}) => {
+   useEffect(() => {
+    SplashScreen.hide()
+   },[])
    StatusBar.setHidden(true)
    const gotonextScreen = () => {
      navigation.navigate("SliderScreenTwo")

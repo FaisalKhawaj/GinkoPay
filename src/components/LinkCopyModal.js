@@ -103,6 +103,7 @@ const styles = StyleSheet.create({
     otherassets:{
         color:graycolor,
         fontSize:16,
+        fontFamily:simpletext,
         marginHorizontal:50,
         marginVertical:20,
         alignSelf:"center"
@@ -110,6 +111,7 @@ const styles = StyleSheet.create({
     link:{
         color:bluetext,
         fontSize:15,
+        fontFamily:simpletext,
         marginVertical:20,
         marginHorizontal:50,
         alignSelf:"center",
