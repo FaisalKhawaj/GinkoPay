@@ -5,14 +5,11 @@ import Modal from 'react-native-modal';
 import { boldtext, simpletext } from '../constants/fonts';
 import { BackgroundColor, graycolor } from '../constants/colors';
 import HeaderBackTextCloseBtn from './HeaderBackTextClose'
-import Fontisto from 'react-native-vector-icons/Fontisto'
 import ARROWDOWN from '../assets/arrowdown.svg'
 import CustomButton from './Button'
-import CustomText from './Text'
-
 const {width, height} = Dimensions.get("window");
 
-const RequestPaymentModal = ({visible, setVisible}) => { 
+const RequestPaymentModal = ({visible, setVisible,}) => { 
   const [value, setValue] = React.useState("")
     return(
         <Modal 
@@ -69,7 +66,7 @@ const RequestPaymentModal = ({visible, setVisible}) => {
                     </View>
                     
                     <View style={{position:"absolute", bottom:20}}>
-                        <CustomButton text={"Next"} onPress={() => alert("I am pressed")} />
+                        <CustomButton text={"Next"} onPress={() =>setVisible() } />
                     </View>
                 </Content>
             </Container>

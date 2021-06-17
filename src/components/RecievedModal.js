@@ -8,7 +8,6 @@ import COPY from '../assets/copy.svg'
 import {Container, Content, Text} from 'native-base'
 import CopyLinkModal from './LinkCopyModal'
 import RequestPaymentModal from "./RequestPaymentModal";
-import * as RootNavigation from '../Navigations/NavigationObject';
 const {width, height} = Dimensions.get("window");
 
 
@@ -18,6 +17,7 @@ const recievedModal = ({visible, setVisible}) => {
    
 const openRequestModal =() => {
    setRequestPayment(true)
+   
 }
     return (
         <Modal 
@@ -52,7 +52,7 @@ const openRequestModal =() => {
                 </View>
             </Content>
                <CopyLinkModal visible={copylink}  setVisible={setCopyLink} />
-               <RequestPaymentModal visible={requestPayment}  setVisible={setRequestPayment} />
+               <RequestPaymentModal visible={requestPayment}  setVisible={setRequestPayment}  setVisible2={setVisible} />
             </Container>        
         </Modal>
     )

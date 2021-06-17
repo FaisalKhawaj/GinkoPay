@@ -88,7 +88,7 @@ const renderItem = (item) => {
                     <View style={{flexDirection:"row"}}>
                     <Image 
                         style={{width:40, height:40, resizeMode:"cover", borderRadius:60,}}
-                        source={{uri:"http://callerapp.net/finder/apis/v1/images/03119998999.jpg"}} />
+                        source={require("../assets/token2.png")} />
                     <View style={{marginLeft:10}}>
                         <Text style={{color:"#fff" , fontFamily:simpletext, fontSize:15}}>
                             Binance Coin
@@ -109,8 +109,9 @@ const renderItem = (item) => {
                             Search, public address (0x), or ENS
                         </Text>
                         <Image 
-                        style={{width:20, height:20, resizeMode:"cover", borderRadius:26,}}
-                        source={{uri:"http://callerapp.net/finder/apis/v1/images/03119998999.jpg"}} />
+                            color={graycolor}
+                            style={{width:20, height:20, resizeMode:"cover", borderRadius:26,}}
+                            source={require("../assets/scan.png")} />
                 </View>
                 <Text style={styles.recent}>Recent</Text>
                 <FlatList 

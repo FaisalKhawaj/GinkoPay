@@ -19,17 +19,17 @@ const  CustomerHeader = ({num}) =>  {
           <LinearGradient 
                 start={{x: 0, y: 0}} end={{x: 1, y: 0}}
                 colors={[LinearGradientColorOne,LinearGradientColorTwo]} 
-                style={{width:width/5, borderRadius:2, height:10}}>
+                style={{width:width/5, borderRadius:2, height:8}}>
             </LinearGradient>
             <LinearGradient 
                 start={{x: 0, y: 0}} end={{x: 1, y: 0}}
                 colors={num >1 ?[LinearGradientColorOne,LinearGradientColorTwo]:["#222531","#222531"]} 
-                style={{width:width/5, borderRadius:2, height:10}}>
+                style={{width:width/5, borderRadius:2, height:8}}>
             </LinearGradient>
             <LinearGradient 
                 start={{x: 0, y: 0}} end={{x: 1, y: 0}}
                 colors={num >2 ?[LinearGradientColorOne,LinearGradientColorTwo]:["#222531","#222531"]}
-                style={{width:width/5, borderRadius:2, height:10}}>
+                style={{width:width/5, borderRadius:2, height:8}}>
             </LinearGradient>
             <Text style={{color:"#7C81A2",  fontSize:12,}}>{num}/3</Text>
           </Body>

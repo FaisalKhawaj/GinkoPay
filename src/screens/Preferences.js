@@ -12,7 +12,9 @@ import HeaderBackTextCloseBtn from '../components/HeaderBackTextClose';
 import CustomButton from '../components/Button';
 import { boldtext, simpletext } from '../constants/fonts';
 import KycModal from '../components/kYCModal'
-const { width, height } = Dimensions.get('window')
+import ToggleButton from '../components/ToggleButton';
+import { metaProperty } from '@babel/types';
+const { width, height } = Dimensions.get('window') 
 const Preferences = ({ navigation }) => {
 
     const [showGeneralModal, setShowGeneralModal] = useState(false)
@@ -20,6 +22,9 @@ const Preferences = ({ navigation }) => {
     const [checkedUserSearch, setCheckedUserSearch] = useState('Yes')
     const [showPrivacyModal, setShowPrivacyModal] = useState(false)
     const [showverificationModal , setShowVerificatonModal] =  useState(false)
+    const [privaytoggle , setPrivacyToggle] = useState(false)
+    const [incomming, setIncomming] = useState(false)
+    const [metametric, setMetaMetric] = useState(false)
     const BackBtnHandler = () => {
         navigation.goBack()
     }
@@ -50,6 +55,7 @@ const Preferences = ({ navigation }) => {
         { label: 'Italic', value: 'Italic' },
     ]);
 
+   
     return (
         <Container style={{ backgroundColor: BackgroundColor,flex:1 }}>
             <Content contentContainerStyle={{ backgroundColor: BackgroundColor }} >
@@ -249,6 +255,9 @@ const Preferences = ({ navigation }) => {
 
 
                         <View style={styles.CurrencyPRivacyCurrentLanUserSearchView}>
+                            <View style={{position:"absolute", alignSelf:"flex-end"}}>
+                                <ToggleButton check={privaytoggle} unchecked={setPrivacyToggle} />
+                            </View>
                             <Text style={styles.headingText}>Clear Privacy Data</Text>
                             <Text style={styles.descriptionText}>
                                     Clear Priacy data so all websites must{'\n'}request access to view account information {'\n'}again
@@ -270,6 +279,9 @@ const Preferences = ({ navigation }) => {
                         </View>
 
                         <View style={styles.CurrencyPRivacyCurrentLanUserSearchView}>
+                               <View style={{position:"absolute", alignSelf:"flex-end"}}>
+                                    <ToggleButton check={metametric} unchecked={setMetaMetric} />
+                                </View>    
                             <Text style={styles.headingText}>Participate in MetaMetrics</Text>
                             <Text style={styles.descriptionText}>
                                 Participate in MetaMetrics to help us make GinkoPay better
@@ -277,6 +289,9 @@ const Preferences = ({ navigation }) => {
                         </View>
 
                         <View style={styles.CurrencyPRivacyCurrentLanUserSearchView}>
+                        <View style={{position:"absolute", alignSelf:"flex-end"}}>
+                                <ToggleButton check={incomming} unchecked={setIncomming} />
+                            </View>
                             <Text style={styles.headingText}>Get Incoming Transactions</Text>
                             <Text style={styles.descriptionText}>
                             Third party APIs (Etherscan are used to show {"\n"} your incoming transactions in the history. {"\n"}
