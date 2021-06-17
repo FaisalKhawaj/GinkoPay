@@ -193,7 +193,7 @@ const Preferences = ({ navigation }) => {
                                 fontFamily: 'Poppins-Bold',
                             }}
                             containerStyle={{ width: '90%', alignSelf: 'center', height: 44 }}
-                            setValue={setValueLanguage}
+                             setValue={setValueLanguage}
                             setItems={setLanguageDropDown}
                             setOpen={setOpenLanguage}
                         />
