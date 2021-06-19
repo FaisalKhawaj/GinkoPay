@@ -2,7 +2,7 @@ import React,{useState} from 'react';
 import { View,  Dimensions,StyleSheet,SafeAreaView, ScrollView, Image, Text, TouchableOpacity,  } from 'react-native';
 import Modal from 'react-native-modal';
 import { boldtext, simpletext } from '../constants/fonts';
-import { graycolor,  } from '../constants/colors';
+import { BackgroundColor, graycolor,  } from '../constants/colors';
 import HeaderBackTextClose from './HeaderBackTextClose'
 const {width, height} = Dimensions.get("window");
 import CustomButton from './Button'
@@ -14,14 +14,13 @@ const SentModal = ({visible, setVisible, data}) => {
     }
 
     const navigatetowallet = () => {
-       
         setVisible();
     }
   return (
         <Modal 
             isVisible={visible}
             animationIn="fadeInRight"
-            deviceHeight={Dimensions.get("screen").height*2}
+            deviceHeight={Dimensions.get("screen").height}
             transparent={true}
             style={styles.modal}
             coverScreen={true}
@@ -33,11 +32,13 @@ const SentModal = ({visible, setVisible, data}) => {
             backdropColor = "#1D1F27"
             backdropOpacity = {.85}
         >
-            <SafeAreaView style={{flex:1, height:height}}>
-                <ScrollView contentContainerStyle={{height:height}} style={{height:height}}>
+            <SafeAreaView style={{flex:1, height:height, backgroundColor:BackgroundColor}}>
+            <HeaderBackTextClose text="Confirm"setShowBannerModal={BackBtnHandler} closeModal={BackBtnHandler} />
+                
+                <ScrollView contentContainerStyle={{height:height ,alignSelf:"center", alignItems:"center", width:width}} style={{height:height}}>
                     <View style={styles.mainview}>
-                        <HeaderBackTextClose text="Confirm"setShowBannerModal={BackBtnHandler} closeModal={BackBtnHandler} />
-                        <View style={{alignSelf:"center", justifyContent:"center", alignItems:"center", paddingVertical:20}}>
+                      
+                        <View style={{alignSelf:"center", justifyContent:"center", alignItems:"center", paddingVertical:0}}>
                             <Text style={styles.text}>Amount</Text>
                             <CustomText 
                                 text="12.4345 ETH" 
@@ -62,7 +63,7 @@ const SentModal = ({visible, setVisible, data}) => {
                             </View>
                        
                     </TouchableOpacity>
-
+                    <View style={{height:20}} />
                     <Text style={styles.from}>To</Text>
                     <TouchableOpacity style={styles.fromselect}>
                         <View style={{flexDirection:"row"}}>
@@ -123,9 +124,9 @@ const styles = StyleSheet.create({
     },
     mainview:{
         height:height,
-        flex:1,
+       
         width:width,
-        bottom:0,
+       
         alignSelf:"center",
         paddingHorizontal:20,
         backgroundColor:'#17171A',

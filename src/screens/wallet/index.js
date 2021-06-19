@@ -12,12 +12,19 @@ import RECIEVED from '../../assets/recieved.svg'
 import BUY from '../../assets/buy.svg'
 import CURRECO from '../../assets/CurrencyEthereum.svg'
 
+// Modals 
 import AssetsModal from '../../components/AssetsModal';
 import SentModal from '../../components/SentModal'
 import RecievedModal from '../../components/RecievedModal'
 import BuyModal from '../../components/BuyModal'
 import TransictionCompleted from '../../components/TransitionComplete';
 import TransictionSubmited from '../../components/TransitionSubmittted';
+import SentModalMessage from '../../components/SentModalMessage'
+import RequestPaymentModalusemax from '../../components/RequestPaymentModalusemax';
+import RequestPaymentModal from '../../components/RequestPaymentModal';
+import SentModalConfirm from '../../components/SentModalConfirm';
+import CopyLinkModal from '../../components/LinkCopyModal'
+
 const {width, height} = Dimensions.get("window");
 
 let protfiliodata = [
@@ -74,7 +81,19 @@ const Home = ({navigation}) => {
   const [recievemodal, setRecievedModal] = useState(false);
   const [buymodal, setBuyModal] = useState(false);
   const [trnassubmitted , settranssubmitted] = useState(false)
+  const [sendmessagemodal, setSendMessageModal] = useState(false)
+  const [reqpaymodal, setReqPayModal] = useState(false);  
+  const [sendmodalconfirm, setSendModalConfirm] = useState(false) 
+  const [copylink, setCopyLink] = useState(false)
+  const [requestPayment, setRequestPayment] = useState(false)
   
+  const [modaldata, setModalData] = useState({
+      key:1,
+      name: "Beexay",
+      link:'0x3Dc6...DxE9',
+      image:require("../../assets/token2.png")
+    })
+
   const renderPortfolioItem = ({item}) => {
     return (
       <TouchableOpacity 
@@ -254,10 +273,15 @@ const Home = ({navigation}) => {
         }
         </View>
         <AssetsModal visible={assetsmodal} setVisible={setAssetsModal} />
-        <SentModal visible={sentmodal} setVisible={setSentModal} />
-        <RecievedModal visible={recievemodal} setVisible={setRecievedModal} />
+        <SentModal visible={sentmodal} setVisible={setSentModal} setSendMessageModal={setSendMessageModal} setModalData={setModalData} />
+        <RecievedModal visible={recievemodal} setVisible={setRecievedModal} setCopyLink={setCopyLink} setRequestPayment={setRequestPayment} />
         <BuyModal visible={buymodal} setVisible={setBuyModal} />
-       
+        <SentModalMessage visible={sendmessagemodal} setVisible={setSendMessageModal} data={modaldata} setReqPayModal={setReqPayModal} /> 
+        <RequestPaymentModalusemax  visible={reqpaymodal}  setVisible={setReqPayModal} setSendModalConfirm={setSendModalConfirm} /> 
+        <SentModalConfirm visible={sendmodalconfirm} setVisible={setSendModalConfirm} />
+
+        <CopyLinkModal visible={copylink}  setVisible={setCopyLink} />
+        <RequestPaymentModal visible={requestPayment}  setVisible={setRequestPayment}  setVisible2={setRecievedModal} />
     </Container>
   );
 }; 

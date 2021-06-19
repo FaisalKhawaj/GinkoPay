@@ -8,7 +8,7 @@ import { graycolor, green } from '../constants/colors';
 const {width, height} = Dimensions.get("window");
 
 const HistoryItemModal = ({visible, setVisible, data}) => {
-console.log(data,"data")
+
     return (
         <View style={{flex:1}}>
             <Modal 
@@ -101,7 +101,7 @@ export default HistoryItemModal;
 
 const styles = StyleSheet.create({
     mainview:{
-        height:height/1.5,
+        height:height/1.2,
         flex:1,
         width:width,
         bottom:-20,

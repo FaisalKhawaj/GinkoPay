@@ -3,23 +3,23 @@ import { View, TextInput,  Dimensions,StyleSheet,SafeAreaView, ScrollView, Image
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Modal from 'react-native-modal';
 import { boldtext, simpletext } from '../constants/fonts';
-import { graycolor,  } from '../constants/colors';
+import { BackgroundColor, graycolor,  } from '../constants/colors';
 import TokenModal from './SendModalToken'
 import HeaderBackTextClose from './HeaderBackTextClose'
-import RequestPaymentModal from './RequestPaymentModalusemax';
 const {width, height} = Dimensions.get("window");
 
 import CustomButton from './Button'
 
-const SentModal = ({visible, setVisible, data}) => {
+const SentModal = ({visible, setVisible, data,setReqPayModal}) => {
 
     const [tokenmodal, setTokenModal] = useState(false)
-    const [reqpaymodal, setReqPayModal] = useState(false);
+  
     const BackBtnHandler = () => {
         setVisible();
     }
 
     const openreqpaymentodal = () => {
+        setVisible(false)
         setReqPayModal(true)
     }
   return (
@@ -39,10 +39,11 @@ const SentModal = ({visible, setVisible, data}) => {
             backdropColor = "#1D1F27"
             backdropOpacity = {.85}
         >
-            <SafeAreaView style={{flex:1, height:height}}>
-                <ScrollView contentContainerStyle={{height:height}} style={{height:height}}>
+            <SafeAreaView style={{ height:height, backgroundColor:BackgroundColor, alignSelf:"center"}}>
+            <HeaderBackTextClose text="Sent To"setShowBannerModal={BackBtnHandler} closeModal={BackBtnHandler} />
+                <ScrollView >
                     <View style={styles.mainview}>
-                        <HeaderBackTextClose text="Sent To"setShowBannerModal={BackBtnHandler} closeModal={BackBtnHandler} />
+                       
                         <Text style={styles.from}>From</Text>
                         <TouchableOpacity style={styles.fromselect} onPress={() => setTokenModal(true)}>
                             <View style={{flexDirection:"row"}}>
@@ -64,7 +65,7 @@ const SentModal = ({visible, setVisible, data}) => {
                     </TouchableOpacity>
 
                     <Text style={styles.from}>To</Text>
-                    <TouchableOpacity style={styles.fromselect} onPress={() => setTokenModal(true)}>
+                    <TouchableOpacity style={styles.fromselect}>
                         <View style={{flexDirection:"row"}}>
                         <Image 
                             style={{width:40, height:40, resizeMode:"cover", borderRadius:60,}}
@@ -93,7 +94,7 @@ const SentModal = ({visible, setVisible, data}) => {
                             style={styles.textinput}
                         />
                     </View>
-                    <View style={{position:"absolute", bottom:50, alignSelf:"center"}}>
+                    <View style={{position:"absolute", bottom:20, alignSelf:"center"}}>
                         <CustomButton text={"Next"} onPress={() => openreqpaymentodal()}  />
                     </View>
                     
@@ -101,7 +102,7 @@ const SentModal = ({visible, setVisible, data}) => {
                 </ScrollView>
             </SafeAreaView>
             <TokenModal visible={tokenmodal} setVisible={setTokenModal} /> 
-            <RequestPaymentModal  visible={reqpaymodal}  setVisible={setReqPayModal} />
+           
         </Modal>
     )
 }
@@ -114,10 +115,10 @@ const styles = StyleSheet.create({
         width:width,
     },
     mainview:{
-        height:height,
-        flex:1,
+        height:height*.91,
+       
         width:width,
-        bottom:0,
+      
         alignSelf:"center",
         paddingHorizontal:20,
         backgroundColor:'#17171A',
@@ -209,11 +210,15 @@ const styles = StyleSheet.create({
     },
     textinput:{
         borderColor:graycolor,
-        borderRadius:5,
-        borderWidth:1,
+        borderRadius:15,
+        borderWidth:2,
         color:"#fff",
+        fontFamily:simpletext,
+        borderColor:"gray",
         paddingLeft:10,
         textAlign:"left",
+        opacity:1,
+        backgroundColor:"rgba(255,255,255,.1)",
         textAlignVertical:"top",
         height:180,
         width:width-40

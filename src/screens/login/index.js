@@ -22,7 +22,7 @@ const SliderScreenOne = ({navigation}) => {
    return (
       <SafeAreaView style={styles.container}>
           <ScrollView >
-              <View style={{...styles.container, paddingBottom:50}}  >
+              <View style={{...styles.container, paddingBottom:70}}  >
                 <Image source={require("../../assets/spalsh_text.png")} style={{width:width/1.3, height:width/2.3, resizeMode:"contain"}} />
                 <TextInputFloat 
                   label="Email Address" 
@@ -45,17 +45,20 @@ const SliderScreenOne = ({navigation}) => {
                   ispasswordVisible={ispasswordVisible}
                 />
                 
-                <View style={{flexDirection:"row", width:width-30, justifyContent:"space-between", alignItems:"center"}}>
+                <View style={{flexDirection:"row", width:width-40, justifyContent:"space-between", alignItems:"center"}}>
                     <Text style={{color:"#fff",fontFamily:boldtext,fontSize:20}}>Sign in with Face ID?</Text>
                     <ToggleButton check={check} unchecked={uncheck} />
                 </View>
               
-                <TouchableOpacity onPress={() => navigation.navigate("CreataAccount")} style={width}>
-                    <Text style={{color:lightgray, fontSize:14,fontFamily:simpletext, marginVertical:15, }}>Don't Have an account? <Text style={{color:bluetext, fontFamily:simpletext}}>Sign up now</Text>  </Text>    
+                <TouchableOpacity onPress={() => navigation.navigate("CreataAccount")} style={{width:width-40,}}>
+                    <Text style={{color:lightgray,alignSelf:"center", fontSize:14,fontFamily:simpletext, marginBottom:15,marginTop:45, }}>Don't Have an account? <Text style={{color:bluetext, fontFamily:simpletext}}>Sign up now</Text>  </Text>    
                 </TouchableOpacity>
               
+                <View style={{position:"absolute", bottom:20, alignSelf:"center"}}>
                 <CustomButton  text={"Login"} onPress={gotonextScreen} />
               </View>
+              </View>
+              
           </ScrollView>
       </SafeAreaView>
     

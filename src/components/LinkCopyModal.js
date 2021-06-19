@@ -28,7 +28,7 @@ const CopyLinkModal = ({visible, setVisible}) => {
         <Modal 
             isVisible={visible}
             animationIn="fadeInRight"
-            deviceHeight={Dimensions.get("screen").height*2}
+            deviceHeight={Dimensions.get("screen").height}
             transparent={true}
             style={styles.modal}
             coverScreen={true}
@@ -40,7 +40,7 @@ const CopyLinkModal = ({visible, setVisible}) => {
             backdropColor = "#1D1F27"
             backdropOpacity = {.85}
         >
-        <Container style={{...styles.mainview}}>
+        <Container style={{...styles.mainview,paddingTop:copiedText===""?100:0}}>
             <Content contentContainerStyle={{alignItems:"center"}}>
                 {
                     copiedText === ""?null:<CLIPBOARD style={{marginVertical:30}}  />
@@ -55,7 +55,7 @@ const CopyLinkModal = ({visible, setVisible}) => {
                         <TouchableOpacity onPress={() => {copyToClipboard()}}>
                                 <Text style={styles.buttontext} >Copy Link</Text>
                         </TouchableOpacity>:
-                         <TouchableOpacity onPress={() => {console.log("send")}}>
+                         <TouchableOpacity  onPress={() => setVisible(false)}>
                              <Text style={styles.buttontext} >Send</Text>
                          </TouchableOpacity>
                         }
@@ -79,11 +79,11 @@ const styles = StyleSheet.create({
         height:height
     },
     mainview:{
-        height:height/1.1,
+        height:height/1,
         flex:1,
         width:width,
         bottom:0,
-        paddingVertical:height/10,
+        
         alignSelf: 'center',
         alignItems: 'center',
         backgroundColor:'#17171A',
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
         color:graycolor,
         fontSize:16,
         fontFamily:simpletext,
-        marginHorizontal:50,
+        marginHorizontal:20,
         marginVertical:20,
         alignSelf:"center"
     },
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
         fontSize:15,
         fontFamily:simpletext,
         marginVertical:20,
-        marginHorizontal:50,
+        marginHorizontal:20,
         alignSelf:"center",
         textAlign:"center"
     },

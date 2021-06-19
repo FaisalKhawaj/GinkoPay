@@ -47,7 +47,7 @@ const buttontextcolor="#FEBF32"
             <Content style={{flexGrow:1}} 
                 contentContainerStyle={styles.contentContainerStyle}  >
                     
-          <Image source={require("../assets/kycneed.png")} style={{width:200, height:250, resizeMode:"cover"}} />
+          <Image source={require("../assets/kycneed.png")} style={{width:150, height:200, resizeMode:"cover"}} />
           <Text style={styles.heading}>KYC Needed</Text>
           <Text style={styles.paragraph}>Duo the regulations we will need to ask you for your documents, so we can allow you to use our features. Your document will be only used for verification and will NOT be sent to 3rd parties. Here is the link:</Text>
           <TouchableOpacity>
@@ -58,7 +58,7 @@ const buttontextcolor="#FEBF32"
                         <TouchableOpacity onPress={() => {copyToClipboard()}}>
                                 <Text style={styles.buttontext} >Copy Link</Text>
                         </TouchableOpacity>:
-                         <TouchableOpacity onPress={() => {console.log("send")}}>
+                         <TouchableOpacity onPress={() => {setVisible(false)}}>
                              <Text style={styles.buttontext} >Done</Text>
                          </TouchableOpacity>
                         }

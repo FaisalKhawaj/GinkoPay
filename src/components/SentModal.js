@@ -30,17 +30,12 @@ var obj = [
     },
 ]
 
-const SentModal = ({visible, setVisible}) => {
+const SentModal = ({visible, setVisible, setSendMessageModal, setModalData}) => {
 const [tokenmodal, setTokenModal] = useState(false)
-const [sendmessagemodal, setSendMessageModal] = useState(false)    
-const [modaldata, setModalData] = useState({
-    key:1,
-    name: "Beexay",
-    link:'0x3Dc6...DxE9',
-    image:require("../assets/token2.png")
-  })
+
 
 const openmodal = (item) => {
+    setVisible(false)
     setSendMessageModal(true)
     setModalData(item)
 }
@@ -94,7 +89,7 @@ const renderItem = (item) => {
                             Binance Coin
                         </Text>
                         <Text style={{color:graycolor, fontFamily:simpletext,fontSize:12}}>
-                            Binance Coin
+                        Balance: 19.2371 BNB
                         </Text>
                     </View>
                     </View>
@@ -105,12 +100,11 @@ const renderItem = (item) => {
 
                 <Text style={styles.from}>To</Text>
                 <View style={{height:60, width:width-40,paddingHorizontal:20, marginBottom:30, justifyContent:"space-between", flexDirection:"row", alignItems:"center", borderRadius:10, marginTop:10, alignSelf:"center", borderWidth:1, borderColor:graycolor}}>
-                        <Text style={{color:graycolor, fontFamily:boldtext,fontSize:15}}>
+                        <Text style={{color:graycolor, fontFamily:boldtext,fontSize:13}}>
                             Search, public address (0x), or ENS
                         </Text>
                         <Image 
-                            color={graycolor}
-                            style={{width:20, height:20, resizeMode:"cover", borderRadius:26,}}
+                            style={{width:20,tintColor:graycolor, height:20, resizeMode:"cover", borderRadius:26,}}
                             source={require("../assets/scan.png")} />
                 </View>
                 <Text style={styles.recent}>Recent</Text>
@@ -121,7 +115,7 @@ const renderItem = (item) => {
                 />
             </View>  
             <TokenModal visible={tokenmodal} setVisible={setTokenModal} /> 
-            <SentModalMessage visible={sendmessagemodal} setVisible={setSendMessageModal} data={modaldata} />   
+            
         </Modal>
     )
 }

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Content, Thumbnail } from 'native-base'
 import { View, Text, ScrollView, Dimensions, TouchableOpacity, StyleSheet } from 'react-native'
-import Icon from 'react-native-vector-icons/Ionicons'
 import { RadioButton } from 'react-native-paper';
 import { BackgroundColor } from '../constants/colors';
 import Modal from 'react-native-modal';
@@ -12,8 +11,9 @@ import HeaderBackTextCloseBtn from '../components/HeaderBackTextClose';
 import CustomButton from '../components/Button';
 import { boldtext, simpletext } from '../constants/fonts';
 import KycModal from '../components/kYCModal'
-import ToggleButton from '../components/ToggleButton';
-import { metaProperty } from '@babel/types';
+import CurrencyModal from '../components/CurrencyModal';
+import LanguageModal from '../components/LanguageModal'
+import LinearGradient from 'react-native-linear-gradient'
 const { width, height } = Dimensions.get('window') 
 const Preferences = ({ navigation }) => {
 
@@ -25,6 +25,8 @@ const Preferences = ({ navigation }) => {
     const [privaytoggle , setPrivacyToggle] = useState(false)
     const [incomming, setIncomming] = useState(false)
     const [metametric, setMetaMetric] = useState(false)
+    const [currencymodal, setCurrencyModal] = useState(false)
+    const [languagemodal, setLanguageModal] = useState(false)
     const BackBtnHandler = () => {
         navigation.goBack()
     }
@@ -46,13 +48,28 @@ const Preferences = ({ navigation }) => {
     const [value, setValue] = useState(null);
     const [CurrencyDropDown, setCurrencyDropDown] = useState([
         { label: 'Dollar', value: 'USD-United State Dollar' },
-        { label: 'Euro', value: 'Euro' },
+        { label: 'XLM - Stellar Lumen', value: 'XLM - Stellar Lumen' },
+        { label: 'STORJ - Storj', value: 'STORJ - Storj' },
+        { label: 'PAY - TenX', value: 'PAY - TenX' },
+        { label: 'TKN - TokenCard', value: 'TKN - TokenCard' },
+        { label: 'UAH - Ukrainian Hryvnia', value: 'UAH - Ukrainian Hryvnia' },
+        { label: 'USD - United State Dollar', value: 'USD - United State Dollar' },
+        { label: 'TRST - WeTrust', value: 'TRST - WeTrust' },
+        { label: 'ZEC - Zcash', value: 'ZEC - Zcash' },
     ]);
     const [openLanguage, setOpenLanguage] = useState(false)
     const [valueLanguage, setValueLanguage] = useState(null)
     const [LanguageDropDown, setLanguageDropDown] = useState([
-        { label: 'English', value: 'English' },
-        { label: 'Italic', value: 'Italic' },
+        {label:"Čeština", value:'Čeština'},
+        {label:"Dansk",value:"Dansk"},
+        {label:"Deutsch",value:"Deutsch"},
+        {label:"ελληνικά",value:"ελληνικά"},
+    
+        {label:"English",value:"English"},
+        {label:"Español (Latin America)",value:"Español (Latin America)"},
+        {label:"Estonian",value:"Estonian"},
+      
+
     ]);
 
    
@@ -80,20 +97,23 @@ const Preferences = ({ navigation }) => {
                     description={"In order to use the service of GinkoPay\nyou will need to verify your identy"}
                 />
 
-                <Modal
+                
+            </Content>
+            <Modal
                     animationType="slide"
                     transparent={true}
-                    style={{ height: height / 1, alignSelf: 'center', width: '100%' }}
+                    style={{ height: height, alignSelf: 'center', width: '100%' }}
                     coverScreen={true}
                     animationOut="slideOutDown"
                     visible={showGeneralModal}
                 >
-                    <View style={{ height: height / 1.1, backgroundColor: '#17171A' }}>
+               
+                    <View style={{ height: height / 1,backgroundColor: '#17171A' }}>
                         <HeaderBackTextCloseBtn text="General" closeModal={closeModalHandler} />
                         <View style={styles.CurrencyPRivacyCurrentLanUserSearchView}>
                             <Text style={styles.headingText}>Currency Conversion</Text>
                             <Text style={styles.descriptionText}>
-                                Display fiat values in using o specific{'\n'}currency throughout the application
+                                Display fiat values in using o specific currency throughout the application
                          </Text>
                         </View>
 
@@ -227,15 +247,12 @@ const Preferences = ({ navigation }) => {
                                 <Text style={{ alignSelf: 'center', color: '#FFFF' }}>No</Text>
                             </View>
                         </View>
-                        <View style={{ position: 'absolute', alignSelf: 'center', bottom: 10 }}>
-                            <CustomButton text={"Update"} onPress={UpdateGeneralHandler}
+                           <CustomButton text={"Update"} onPress={UpdateGeneralHandler}
                             />
-                        </View>
+                        
                     </View>
+                   
                 </Modal>
-
-                
-            </Content>
             <Modal
                  animationType="slide"
                  transparent={true}
@@ -255,8 +272,17 @@ const Preferences = ({ navigation }) => {
 
 
                         <View style={styles.CurrencyPRivacyCurrentLanUserSearchView}>
-                            <View style={{position:"absolute", alignSelf:"flex-end"}}>
-                                <ToggleButton check={privaytoggle} unchecked={setPrivacyToggle} />
+                            <View style={{position:"absolute",zIndex:20, alignSelf:"flex-end"}}>
+                           
+                                <LinearGradient 
+                                 onPress={() => setPrivacyToggle(!privaytoggle)}
+                                    start={{x: 0, y: 0}} end={{x: 1, y: 0}}
+                                    colors={[ "#70A2FF","#F76E64"]} 
+                                    style={{...styles.LinearGradient, alignItems:privaytoggle?"flex-end":"flex-start"}}
+                                >
+                                    <TouchableOpacity onPress={() => setPrivacyToggle(!privaytoggle)}  style={{height:20, width:20, borderRadius:4, backgroundColor:"#fff"}} />
+                                </LinearGradient>
+                          
                             </View>
                             <Text style={styles.headingText}>Clear Privacy Data</Text>
                             <Text style={styles.descriptionText}>
@@ -279,8 +305,14 @@ const Preferences = ({ navigation }) => {
                         </View>
 
                         <View style={styles.CurrencyPRivacyCurrentLanUserSearchView}>
-                               <View style={{position:"absolute", alignSelf:"flex-end"}}>
-                                    <ToggleButton check={metametric} unchecked={setMetaMetric} />
+                               <View style={{position:"absolute",zIndex:20, alignSelf:"flex-end"}}>
+                                    <LinearGradient 
+                                        start={{x: 0, y: 0}} end={{x: 1, y: 0}}
+                                        colors={[ "#70A2FF","#F76E64"]} 
+                                        style={{...styles.LinearGradient, alignItems:metametric?"flex-end":"flex-start"}}
+                                    >
+                                        <TouchableOpacity style={{height:20, width:20, borderRadius:4, backgroundColor:"#fff"}} onPress={() => setMetaMetric(!metametric)} />
+                                    </LinearGradient>     
                                 </View>    
                             <Text style={styles.headingText}>Participate in MetaMetrics</Text>
                             <Text style={styles.descriptionText}>
@@ -289,8 +321,16 @@ const Preferences = ({ navigation }) => {
                         </View>
 
                         <View style={styles.CurrencyPRivacyCurrentLanUserSearchView}>
-                        <View style={{position:"absolute", alignSelf:"flex-end"}}>
-                                <ToggleButton check={incomming} unchecked={setIncomming} />
+                        <View style={{position:"absolute",zIndex:20, alignSelf:"flex-end"}}>
+                                
+                                        <LinearGradient 
+                                            start={{x: 0, y: 0}} end={{x: 1, y: 0}}
+                                            colors={[ "#70A2FF","#F76E64"]} 
+                                            style={{...styles.LinearGradient, alignItems:incomming?"flex-end":"flex-start"}}
+                                        >
+                                             <TouchableOpacity onPress={() => setIncomming(!incomming)} style={{height:20, width:20, borderRadius:4, backgroundColor:"#fff"}}/>
+                                        </LinearGradient>
+                                  
                             </View>
                             <Text style={styles.headingText}>Get Incoming Transactions</Text>
                             <Text style={styles.descriptionText}>
@@ -306,6 +346,8 @@ const Preferences = ({ navigation }) => {
                 </ScrollView>
             </Modal>
             <KycModal visible={showverificationModal} setVisible={setShowVerificatonModal} />
+            <CurrencyModal visible={languagemodal} setVisible={setCurrencyModal} />
+            <LanguageModal visible={currencymodal} setVisible={setLanguageModal} />
         </Container>
     )
 }
@@ -320,6 +362,13 @@ const styles = StyleSheet.create({
     },
     descriptionText: {
         fontFamily:simpletext,  fontSize: 14, color: '#ABAFC4',marginVertical: 5,
-    }
+    },
+    LinearGradient:{
+        width:70, 
+        height:30, 
+        justifyContent:"center",
+        paddingHorizontal:8, 
+        borderRadius:8
+      }
 
 })

@@ -4,7 +4,7 @@ import {StyleSheet,TouchableOpacity,View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient'
 const ToggleButton = ({check, unchecked}) => {
   return (
-       <TouchableOpacity onPress={() => unchecked(!check)} >
+       <TouchableOpacity onPress={() => unchecked(!check)} style={styles.LinearGradient} >
             <LinearGradient 
                 start={{x: 0, y: 0}} end={{x: 1, y: 0}}
                 colors={[ "#70A2FF","#F76E64"]} 
