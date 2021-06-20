@@ -6,8 +6,8 @@ import { boldtext, simpletext } from '../constants/fonts';
 import CustomButton from './Button'
 const {width, height} = Dimensions.get("window");
 import { Container,  Content,  Item, Input, Label } from 'native-base'
-const  TermsAndConditionModal = ({isModalVisible,toggleModal}) =>  {
-  console.log(isModalVisible,"isModalVisible")
+const  ChnagePasswordModal = ({isModalVisible,setModalVisible,toggleModal}) =>  {
+ 
   const [password, setPassword] = useState("")
   
   return (
@@ -41,7 +41,7 @@ const  TermsAndConditionModal = ({isModalVisible,toggleModal}) =>  {
               </Item>
               
           </View>
-          <CustomButton text={"I Got it"} onPress ={() => toggleModal()} />
+          <CustomButton text={"I Got it"} onPress ={() => setModalVisible()} />
           </View>
         </Content>
 
@@ -49,7 +49,7 @@ const  TermsAndConditionModal = ({isModalVisible,toggleModal}) =>  {
   );
 }
 
-export default TermsAndConditionModal;
+export default ChnagePasswordModal;
 
 const styles = StyleSheet.create({
   modal:{

@@ -29,7 +29,17 @@ const {width, height} = Dimensions.get("window");
   
   const [isModalVisible, setModalVisible] = useState(true);
   const [LoadChangingPassword, setLoadChangingPassword]  = useState(false);
-
+  const [privaytoggle, setPrivacyToggle] = useState(false)
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   const toggleModal = () => {     
     setModalVisible(false);
     setLoadChangingPassword(true)
@@ -40,7 +50,13 @@ const {width, height} = Dimensions.get("window");
 
 
   const gotonextScreen = () => {
-    navigation.goBack();
+    setModalVisible(false);
+    setLoadChangingPassword(true)
+    setTimeout(() => {
+        setLoadChangingPassword(false)
+        navigation.goBack();
+    }, 3000);
+   // navigation.goBack();
   }
 
    StatusBar.setHidden(true)
@@ -50,10 +66,6 @@ const {width, height} = Dimensions.get("window");
         <BackBtnWithMiddleText text="Security & Privacy" setShowBannerModal={gotonextScreen} closeModal={gotonextScreen} />
         <Content style={{flexGrow:1}} contentContainerStyle={{paddingBottom:20}} >
           <Text style={styles.createaccount}> Change Password</Text>
-          
-          
-
-
           <View style={styles.textinputmaincontainer}>
             <Item stackedLabel 
               style={styles.textinputcontainer}>
@@ -103,13 +115,16 @@ const {width, height} = Dimensions.get("window");
 
           <View style={styles.faceidsignin}>
               <Text style={{color:"#fff", fontFamily:fontmedium, fontSize:16}}>Sign in with Face ID?</Text>
-              <LinearGradient 
-                start={{x: 0, y: 0}} end={{x: 1, y: 0}}
-                colors={[LinearGradientColorOne,LinearGradientColorTwo]} 
-                style={styles.LinearGradient}
-              >
-              <View style={{height:20, width:20, borderRadius:4, backgroundColor:"#fff"}}></View>
-              </LinearGradient>
+              <View style={{position:"absolute",zIndex:20,right:0, alignSelf:"flex-end"}}>   
+                  <LinearGradient 
+                    onPress={() => setPrivacyToggle(!privaytoggle)}
+                      start={{x: 0, y: 0}} end={{x: 1, y: 0}}
+                      colors={[ "#70A2FF","#F76E64"]} 
+                      style={{...styles.LinearGradient, alignItems:privaytoggle?"flex-end":"flex-start"}}
+                  >
+                      <TouchableOpacity onPress={() => setPrivacyToggle(!privaytoggle)}  style={{height:20, width:20, borderRadius:4, backgroundColor:"#fff"}} />
+                  </LinearGradient>    
+              </View>
            </View>
           
           <View style={{flexDirection:"row", marginVertical:10,marginBottom:50, width:width-60,alignSelf:"center" }}>
@@ -134,9 +149,10 @@ const {width, height} = Dimensions.get("window");
                  style={modalstyles.modal}
                  useNativeDriver={true}
             >
-                <Content style={modalstyles.mainview} contentContainerStyle={{flex:1, alignItems:"center",justifyContent:"flex-end"}}>
+                <Content style={modalstyles.mainview} contentContainerStyle={{flex:1, justifyContent:"flex-end"}}>
+                <BackBtnWithMiddleText text="Change Password" setShowBannerModal={gotonextScreen} closeModal={gotonextScreen} />
                     <View style={{backgroundColor:BackgroundColor, flex:1}}>
-                        <BackBtnWithMiddleText text="Change Password" setShowBannerModal={gotonextScreen} closeModal={gotonextScreen} />
+                        
                         <LottieView source={require('../../styles/lotties.json')} autoPlay loop style={{width:200, height:400}} />
                         <Text style={modalstyles.whitetext}>Changing Password</Text>
                         <Text style={modalstyles.graytext}>You will have to Login again with your new password.</Text>
@@ -216,7 +232,7 @@ const {width, height} = Dimensions.get("window");
       height:30, 
       justifyContent:"center", 
       alignItems:"flex-end", 
-      paddingRight:8, 
+      paddingHorizontal:8, 
       borderRadius:8
     }
  })

@@ -8,18 +8,20 @@ import HeaderBackTextCloseBtn from './HeaderBackTextClose'
 import ARROWDOWN from '../assets/arrowdown.svg'
 import CustomButton from './Button'
 import CustomText from './Text'
-import SentModalConfirm from './SentModalConfirm';
 const {width, height} = Dimensions.get("window");
 
-const RequestPaymentModal = ({visible, setVisible}) => { 
+const RequestPaymentModal = ({visible, setVisible,setSendModalConfirm}) => { 
   const [value, setValue] = React.useState("")
-  const [sendmodalconfirm, setSendModalConfirm] = useState(false)
+ const closeModal= () => {
+    setSendModalConfirm(true)
+    setVisible(false)
+ }
     return(
         <Modal 
             isVisible={visible}
             animationIn="fadeInRight"
-            deviceHeight={Dimensions.get("screen").height*2}
-            transparent={true}
+            deviceHeight={Dimensions.get("window").height}
+           
             style={styles.modal}
             coverScreen={true}
             animationOut="slideOutDown"
@@ -31,7 +33,7 @@ const RequestPaymentModal = ({visible, setVisible}) => {
             backdropOpacity = {.85}
         >
         <Container style={styles.mainview}>  
-            <HeaderBackTextCloseBtn 
+        <HeaderBackTextCloseBtn 
                 text="Amount" 
                 setShowBannerModal={setVisible} 
                 closeModal={setVisible} 
@@ -73,12 +75,14 @@ const RequestPaymentModal = ({visible, setVisible}) => {
                         <Text style={styles.buttontext}>$455.555</Text>
                        <Image source={require("../assets/updown.png")} style={{width:15,height:15}} />
                     </View>
-                    <Text style={{color:"#ffffff", fontFamily:simpletext, marginVertical:30}}>BALANCE 12.343BNB</Text>
-                    <View style={{position:"absolute", bottom:20}}>
-                        <CustomButton text={"Next"} onPress={() => setSendModalConfirm(true)} />
-                    </View>
+                    <Text style={{color:"#ffffff", fontFamily:simpletext, marginVertical:10}}>BALANCE 12.343BNB</Text>
+                    
+                   
                 </Content>
-                <SentModalConfirm visible={sendmodalconfirm} setVisible={setSendModalConfirm} />
+                     <View style={{position:"absolute", bottom:20, alignSelf:"center"}}>
+                        <CustomButton text={"Next"} onPress={() => closeModal()} />
+                    </View>
+               
             </Container>
         </Modal>
     )
@@ -88,13 +92,10 @@ export default RequestPaymentModal;
 
 const styles = StyleSheet.create({
     modal:{
-        margin: 0
+      margin:0, 
     },
     mainview:{
-        height:height/1,
-        flex:1,
-        width:width,
-        bottom:0,
+        height:height,
         alignSelf: 'center',
         backgroundColor:BackgroundColor,
         width:width,
@@ -161,6 +162,7 @@ const styles = StyleSheet.create({
         flexDirection:"row", 
         paddingHorizontal:20, 
         borderRadius:30,
+        height:35,
         marginVertical:30,
         paddingVertical:5,
         justifyContent:"center", 

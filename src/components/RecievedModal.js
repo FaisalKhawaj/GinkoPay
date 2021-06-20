@@ -11,15 +11,18 @@ import RequestPaymentModal from "./RequestPaymentModal";
 const {width, height} = Dimensions.get("window");
 
 
-const recievedModal = ({visible, setVisible}) => {
-   const [copylink, setCopyLink] = useState(false)
-   const [requestPayment, setRequestPayment] = useState(false)
-   
+const recievedModal = ({visible, setVisible,setRequestPayment,setCopyLink}) => {
+  
 const openRequestModal =() => {
    setRequestPayment(true)
+   setVisible()
    
 }
-    return (
+const OpenLinkModal = () => {
+    setCopyLink(true)
+    setVisible()
+}
+    return ( 
         <Modal 
             isVisible={visible}
             animationIn="fadeInRight"
@@ -42,7 +45,7 @@ const openRequestModal =() => {
                <Image source={require("../assets/wallet.png")} style={{width:150,height:150}} />
                 <Text style={styles.otherassets}>Your address to Receive payment</Text>
                 <TouchableOpacity 
-                onPress={() => setCopyLink(true)}
+                onPress={() => OpenLinkModal()}
                 style={{flexDirection:"row", marginVertical:20,justifyContent:"center",alignItems:"center", backgroundColor:"#2A2D3C", height:40, minWidth:100, paddingHorizontal:20, borderRadius:10}}>
                 <Text style={styles.Receive}> 0x3Dc6...DfCE</Text>
                    <COPY /> 
@@ -51,8 +54,7 @@ const openRequestModal =() => {
                     <CustomButton  text={"Request Payment"} onPress={() => openRequestModal()} />
                 </View>
             </Content>
-               <CopyLinkModal visible={copylink}  setVisible={setCopyLink} />
-               <RequestPaymentModal visible={requestPayment}  setVisible={setRequestPayment}  setVisible2={setVisible} />
+               
             </Container>        
         </Modal>
     )

@@ -54,7 +54,7 @@ const Settings = ({ navigation }) => {
         alert('SendFeedback')
     }
     const LogOutHandler = () => {
-        alert('Logout')
+        navigation.navigate("Login")
     }
     const UpdateHandler = () => {
         setShowEditProfileModal(!showEditProfileModal)

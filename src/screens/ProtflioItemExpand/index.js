@@ -11,7 +11,11 @@ import RecievedModal from '../../components/RecievedModal'
 import { graycolor, green } from '../../constants/colors';
 import { simpletext } from '../../constants/fonts';
 import CustomText from '../../components/Text';
-import { useSafeArea } from 'react-native-safe-area-context';
+import SentModalMessage from '../../components/SentModalMessage'
+import RequestPaymentModalusemax from '../../components/RequestPaymentModalusemax';
+import RequestPaymentModal from '../../components/RequestPaymentModal';
+import SentModalConfirm from '../../components/SentModalConfirm';
+import CopyLinkModal from '../../components/LinkCopyModal'
 const {width, height} = Dimensions.get("window");
 
 var Protfilio = [
@@ -71,6 +75,19 @@ const ProtfilioItemExpanded = ({navigation}) => {
   const [recievemodal, setRecievedModal] = useState(false);
   const [data, setdata] = useState(null);
 
+  const [buymodal, setBuyModal] = useState(false);
+  const [trnassubmitted , settranssubmitted] = useState(false)
+  const [sendmessagemodal, setSendMessageModal] = useState(false)
+  const [reqpaymodal, setReqPayModal] = useState(false);  
+  const [sendmodalconfirm, setSendModalConfirm] = useState(false) 
+  const [copylink, setCopyLink] = useState(false)
+  const [requestPayment, setRequestPayment] = useState(false)
+  const [modaldata, setModalData] = useState({
+    key:1,
+    name: "Beexay",
+    link:'0x3Dc6...DxE9',
+    image:require("../../assets/token2.png")
+  })
   const BackBtnHandler = () => {
     navigation.goBack()
   }
@@ -156,8 +173,16 @@ const ProtfilioItemExpanded = ({navigation}) => {
           <View style={{position:'absolute',}}>
             <HistoryItemModal visible={itemView} setVisible={setItemView} data={data} />
           </View>
-          <SentModal visible={sentmodal} setVisible={setSentModal} />
-          <RecievedModal visible={recievemodal} setVisible={setRecievedModal} />
+          <SentModal visible={sentmodal} setVisible={setSentModal} setSendMessageModal={setSendMessageModal} setModalData={setModalData} />
+          <RecievedModal visible={recievemodal} setVisible={setRecievedModal} setCopyLink={setCopyLink} setRequestPayment={setRequestPayment} />
+        
+          <SentModalMessage visible={sendmessagemodal} setVisible={setSendMessageModal} data={modaldata} setReqPayModal={setReqPayModal} /> 
+          <RequestPaymentModalusemax  visible={reqpaymodal}  setVisible={setReqPayModal} setSendModalConfirm={setSendModalConfirm} /> 
+          <SentModalConfirm visible={sendmodalconfirm} setVisible={setSendModalConfirm} />
+
+          <CopyLinkModal visible={copylink}  setVisible={setCopyLink} />
+          <RequestPaymentModal visible={requestPayment}  setVisible={setRequestPayment}  setVisible2={setRecievedModal} />
+          
       </View>
     );
   }; 

@@ -127,6 +127,32 @@ let newsdata = [
     source:"News Source"
   },
 ]
+
+let watchlistdata = [{
+  key:1,
+  image:require("../../assets/btc.png"),
+  name:"Bitcoin",
+  Heading:"BTC",
+  amount:"USD 43,906,95",
+  percent:"11.71%"
+  },
+  {
+    key:2,
+    image:require("../../assets/btc.png"),
+    name:"Bitcoin",
+    Heading:"BTC",
+    amount:"USD 43,906,95",
+    percent:"11.71%"
+    },
+  {
+      key:3,
+      image:require("../../assets/btc.png"),
+      name:"Bitcoin",
+      Heading:"BTC",
+      amount:"USD 43,906,95",
+      percent:"11.71%"
+  },
+]
 const Home = ({navigation}) => {
 
   const [data,setData] = useState(obj)
@@ -242,25 +268,9 @@ const Home = ({navigation}) => {
     )
   }
 
-  const openNewsItem = (item) => {
-    setItemView(true)
-  }
-
-  const marketPress = () => {
-    setNewsTab(false)
-    setItemView(false)
-  }
-  
-const backBtn = () => {
-
-}
-  return (
-      <View style={styles.container}>
-        <HeaderBackBtnWithLogo backBtn={backBtn} />
-          <Text style={{color:'#fff',fontSize:22,margin:20,fontFamily:boldtext}}>
-            Watchlist
-          </Text>
-          <View style={styles.mainView}>
+  const watchListrenderItem = ({item}) =>{
+    return(
+      <View style={styles.mainView}>
               <Image style={styles.iconBackground} source={require('../../assets/btc.png')} /> 
               <View style={{flexDirection:'column',flex:1}}>
                   <Text style={{color:'#fff',fontFamily:simpletext,fontSize:16}}>
@@ -279,6 +289,36 @@ const backBtn = () => {
                 </Text>
             </View>
           </View>
+    )
+  }
+  const openNewsItem = (item) => {
+    setItemView(true)
+  }
+
+  const marketPress = () => {
+    setNewsTab(false)
+    setItemView(false)
+  }
+  
+const backBtn = () => {
+
+}
+  return (
+      <View style={styles.container}>
+        <HeaderBackBtnWithLogo backBtn={backBtn} />
+          <Text style={{color:'#fff',fontSize:22,marginHorizontal:20,fontFamily:boldtext}}>
+            Watchlist
+          </Text>
+          <View>
+            <FlatList 
+                data={watchlistdata}
+                horizontal={true}
+                style={{height:60, marginTop:0,}}
+                contentContainerStyle={{height:60}}
+                renderItem={watchListrenderItem}
+                keyExtractor={(item,index) => index.toString()}
+              />
+            </View> 
           <Text style={{color:'#fff',margin:20,fontSize:20,fontFamily:boldtext}}>
             Top Movers
           </Text>
@@ -386,6 +426,9 @@ const styles = StyleSheet.create({
       flexDirection:'row',
       justifyContent:'flex-start',
       marginHorizontal:20,
+      height:60,
+      paddingRight:30,
+      width:width,
     },
     iconBackground: {
       height:45,
